@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// styles for this kit
+import "assets/css/bootstrap.min.css";
+import "assets/scss/now-ui-kit.scss";
+import "assets/demo/demo.css";
+import "assets/demo/nucleo-icons-page-styles.css";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// pages for this kit
+import HomePage from "views/HomePage";
+import LoginPage from "views/LoginPage";
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Switch>
+      <Switch>
+        <Route path="/index" render={props => <HomePage {...props} />} />
+        <Route path="/login" render={props => <LoginPage {...props} />} />
+        <Redirect to="/index" />
+        <Redirect from="/" to="/index" />
+      </Switch>
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById("root")
+);
