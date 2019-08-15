@@ -1,18 +1,30 @@
-// Plugins CSS
-@import "plugins/plugin-nouislider";
-@import "plugins/plugin-react-datetime";
+/*!
 
-// Core CSS
-@import "now-ui-kit/misc";
-@import "now-ui-kit/typography";
+=========================================================
+* Argon Design System React - v1.0.0 based on Argon Design System - v1.0.1
+=========================================================
 
-// components
-@import "now-ui-kit/dropdowns";
-@import "now-ui-kit/modals";
-@import "now-ui-kit/popovers";
+* Product Page: https://www.creative-tim.com/product/argon-design-system-react
+* Copyright 2018 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
 
-// example pages and sections
-@import "now-ui-kit/sections";
+* Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+// Custom components
+
+@import "custom/dropdown.scss";
+@import "custom/mixins.scss";
+@import "custom/navbar.scss";
+@import "custom/popover.scss";
+@import "custom/separator.scss";
 
 
-@import "now-ui-kit/responsive";
+// Vendor
+
+@import "custom/vendor/react-datetime.scss";
