@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -14,12 +15,30 @@ import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 
 class Fantasy extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
+
+    axios
+      .get("https://fantasy-bfl.herokuapp.com/news")
+      .then(res => {
+        const data = res.data;
+        this.setState({ data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
   render() {
+    console.log(this.state.data);
     return (
       <>
         <Header />

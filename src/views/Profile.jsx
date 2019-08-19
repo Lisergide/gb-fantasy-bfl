@@ -13,7 +13,7 @@ import {
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 // import NewsSlider from "components/NewsSlider/NewsSlider";
-import Carousel from "views/IndexSections/Carousel";
+import NewsBox from "components/NewsBox/NewsBox";
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -21,21 +21,22 @@ class Profile extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+
   render() {
     return (
       <>
-        <Header />
+        <Header/>
         <main className="profile-page" ref="main">
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
             <div className="shape shape-style-1 shape-default alpha-4">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
             </div>
             {/* SVG separator */}
             <div className="separator separator-bottom separator-skew">
@@ -56,7 +57,7 @@ class Profile extends React.Component {
           </section>
           <section className="section">
             <Container>
-              <Card className="card-profile shadow mt--300">
+              <Card className="card-profile shadow mt--300 pb-5">
                 <div className="px-4">
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
@@ -135,14 +136,15 @@ class Profile extends React.Component {
                       <Col lg="9">
                         <p>
                           Брянская Футбольная Лига - это лига, которая
-                          объединяет не только футболистов-любителей, но и самых
-                          настоящих профессионалов. За 3 года существования БФЛ
-                          в ней сыграло 63 команды и около 700 футболистов.
-                          Среди которых были футболисты брянского "Динамо"
-                          Евгений Синица и Никита Бондарев, полузащитник
-                          смоленского "ЦРФСО" - Андрей Рыченков, а также Сергей
-                          Терехов - защитник команды Российской Премьер-лиги
-                          "Оренбург". Основной целью БФЛ является развитие и
+                          объединяет не только футболистов-любителей, но и
+                          самых настоящих профессионалов. За 3 года
+                          существования БФЛ в ней сыграло 63 команды и около
+                          700 футболистов. Среди которых были футболисты
+                          брянского "Динамо" Евгений Синица и Никита
+                          Бондарев, полузащитник смоленского "ЦРФСО" -
+                          Андрей Рыченков, а также Сергей Терехов - защитник
+                          команды Российской Премьер-лиги "Оренбург".
+                          Основной целью БФЛ является развитие и
                           популяризация футбола в городе Брянске и Брянской
                           области.
                         </p>
@@ -153,16 +155,45 @@ class Profile extends React.Component {
                     </Row>
                   </div>
                 </div>
-                <Row className="justify-content-center">
-                  <Col>
-                    <Carousel />
-                  </Col>
-                </Row>
+                <div className="news_block">
+                  <Row>
+                    <Col sm="4" className="d-flex justify-content-center">
+                      <NewsBox/>
+                    </Col>
+                    <Col sm="4" className="d-flex justify-content-center">
+                      <NewsBox/>
+                    </Col>
+                    <Col sm="4" className="d-flex justify-content-center">
+                      <NewsBox/>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col sm="4" className="d-flex justify-content-center">
+                      <NewsBox/>
+                    </Col>
+                    <Col sm="4" className="d-flex justify-content-center">
+                      <NewsBox/>
+                    </Col>
+                    <Col sm="4" className="d-flex justify-content-center">
+                      <NewsBox/>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center my-3">
+                    <Col lg="9" className="d-flex justify-content-center">
+                      <Button
+                      outline
+                      color="primary"
+                      >
+                        Смотреть все
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
               </Card>
             </Container>
           </section>
         </main>
-        <Footer />
+        <Footer/>
       </>
     );
   }

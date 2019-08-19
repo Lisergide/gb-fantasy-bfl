@@ -49,7 +49,7 @@ class Login extends React.Component {
                   <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-5">
                       <div className="text-muted text-center mb-3">
-                        <small>Sign in with</small>
+                        <small>Вход через социальные сети</small>
                       </div>
                       <div className="btn-wrapper text-center">
                         <Button
@@ -61,30 +61,30 @@ class Login extends React.Component {
                           <span className="btn-inner--icon mr-1">
                             <img
                               alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
+                              src={require("assets/img/icons/common/vk.svg")}
                             />
                           </span>
-                          <span className="btn-inner--text">Github</span>
+                          <span className="btn-inner--text">Vk</span>
                         </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/google.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
-                        </Button>
+                        {/*<Button*/}
+                        {/*  className="btn-neutral btn-icon ml-1"*/}
+                        {/*  color="default"*/}
+                        {/*  href="#pablo"*/}
+                        {/*  onClick={e => e.preventDefault()}*/}
+                        {/*>*/}
+                        {/*  <span className="btn-inner--icon mr-1">*/}
+                        {/*    <img*/}
+                        {/*      alt="..."*/}
+                        {/*      src={require("assets/img/icons/common/google.svg")}*/}
+                        {/*    />*/}
+                        {/*  </span>*/}
+                        {/*  <span className="btn-inner--text">Google</span>*/}
+                        {/*</Button>*/}
                       </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="text-center text-muted mb-4">
-                        <small>Or sign in with credentials</small>
+                        <small>Войти используя учетные данные</small>
                       </div>
                       <Form role="form">
                         <FormGroup className="mb-3">
@@ -105,7 +105,7 @@ class Login extends React.Component {
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="Password"
+                              placeholder="Пароль"
                               type="password"
                               autoComplete="off"
                             />
@@ -121,7 +121,7 @@ class Login extends React.Component {
                             className="custom-control-label"
                             htmlFor=" customCheckLogin"
                           >
-                            <span>Remember me</span>
+                            <span>Запомнить меня</span>
                           </label>
                         </div>
                         <div className="text-center">
@@ -130,7 +130,7 @@ class Login extends React.Component {
                             color="primary"
                             type="button"
                           >
-                            Sign in
+                            Войти
                           </Button>
                         </div>
                       </Form>
@@ -143,7 +143,7 @@ class Login extends React.Component {
                         href="#pablo"
                         onClick={e => e.preventDefault()}
                       >
-                        <small>Forgot password?</small>
+                        <small>Зайбыли пароль?</small>
                       </a>
                     </Col>
                     <Col className="text-right" xs="6">
@@ -152,7 +152,7 @@ class Login extends React.Component {
                         href="#pablo"
                         onClick={e => e.preventDefault()}
                       >
-                        <small>Create new account</small>
+                        <small>Создать новый аккаунт</small>
                       </a>
                     </Col>
                   </Row>

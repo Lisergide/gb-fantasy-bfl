@@ -49,7 +49,7 @@ class Register extends React.Component {
                   <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-5">
                       <div className="text-muted text-center mb-3">
-                        <small>Sign up with</small>
+                        <small>Вход через социальные сети</small>
                       </div>
                       <div className="text-center">
                         <Button
@@ -61,30 +61,16 @@ class Register extends React.Component {
                           <span className="btn-inner--icon mr-1">
                             <img
                               alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
+                              src={require("assets/img/icons/common/vk.svg")}
                             />
                           </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/google.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
+                          <span className="btn-inner--text">Vk</span>
                         </Button>
                       </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="text-center text-muted mb-4">
-                        <small>Or sign up with credentials</small>
+                        <small>Регистрация учетной записи</small>
                       </div>
                       <Form role="form">
                         <FormGroup>
@@ -94,7 +80,7 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Name" type="text" />
+                            <Input placeholder="Никнейм" type="text" />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -115,7 +101,7 @@ class Register extends React.Component {
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="Password"
+                              placeholder="Пароль"
                               type="password"
                               autoComplete="off"
                             />
@@ -123,9 +109,9 @@ class Register extends React.Component {
                         </FormGroup>
                         <div className="text-muted font-italic">
                           <small>
-                            password strength:{" "}
+                            сложность пароля:{" "}
                             <span className="text-success font-weight-700">
-                              strong
+                              сложный
                             </span>
                           </small>
                         </div>
@@ -142,12 +128,12 @@ class Register extends React.Component {
                                 htmlFor="customCheckRegister"
                               >
                                 <span>
-                                  I agree with the{" "}
+                                  Я принимаю условия{" "}
                                   <a
                                     href="#pablo"
                                     onClick={e => e.preventDefault()}
                                   >
-                                    Privacy Policy
+                                    Пользовательского соглашения
                                   </a>
                                 </span>
                               </label>
@@ -160,7 +146,7 @@ class Register extends React.Component {
                             color="primary"
                             type="button"
                           >
-                            Create account
+                            Создать аккаунт
                           </Button>
                         </div>
                       </Form>

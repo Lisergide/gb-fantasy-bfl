@@ -23,9 +23,6 @@ import {
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 
-// index page sections
-import Download from "../IndexSections/Download.jsx";
-
 class Landing extends React.Component {
   state = {};
   componentDidMount() {
@@ -837,7 +834,6 @@ class Landing extends React.Component {
               </Row>
             </Container>
           </section>
-          <Download />
         </main>
         <Footer />
       </>
