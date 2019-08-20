@@ -18,7 +18,7 @@ class Fantasy extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      news: [],
     };
   }
 
@@ -30,15 +30,15 @@ class Fantasy extends React.Component {
     axios
       .get("https://fantasy-bfl.herokuapp.com/news")
       .then(res => {
-        const data = res.data;
-        this.setState({ data });
+        const data = res.data.results;
+        this.setState({ news: data });
       })
       .catch(function(error) {
         console.log(error);
       });
   }
   render() {
-    console.log(this.state.data);
+    console.log(this.state.news);
     return (
       <>
         <Header />

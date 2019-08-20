@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -54,13 +55,31 @@ const news = [
 ];
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      news: [],
+    };
+  }
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
+
+    axios
+        .get("https://fantasy-bfl.herokuapp.com/news")
+        .then(res => {
+          const data = res.data.results;
+          this.setState({ news: data });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
   }
 
   render() {
+    const { news } = this.state;
     return (
       <>
         <Header/>
