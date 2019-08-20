@@ -10,6 +10,7 @@ import Login from "views/Login";
 import Profile from "views/Profile";
 import Register from "views/Register";
 import Fantasy from "views/Fantasy";
+import News from "views/News";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/login-page" exact render={props => <Login {...props} />}/>
       <Route path="/register-page" exact render={props => <Register {...props} />}/>
       <Route path="/fantasy-page" exact render={props => <Fantasy {...props} />}/>
+      <Route path="/news-page/:id" exact render={props => <News {...props} />}/>
       <Redirect to="/"/>
     </Switch>
   </BrowserRouter>,

@@ -61,7 +61,7 @@
 
         @include media-breakpoint-between(sm, md) {
             .card-profile-stats {
-                margin-top: 30px;
+                margin-top: 65px;
             }
         }
     }
@@ -95,6 +95,22 @@
 }
 
 // Custom news box user element
-//.news_box:hover {
-//    transform: scale(1.2);
-//}
+.news_box {
+    overflow: hidden;
+    position: relative;
+
+    &__body {
+        width: 280px;
+        height: 215px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all 1s ease;
+        -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+    }
+
+    &__body:hover {
+        background-size: 110%;
+    }
+}

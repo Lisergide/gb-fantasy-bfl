@@ -12,8 +12,46 @@ import {
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
-// import NewsSlider from "components/NewsSlider/NewsSlider";
 import NewsBox from "components/NewsBox/NewsBox";
+
+const news = [
+  {
+    "id": 1,
+    "news_date": "2019-08-14T00:00:00.000Z",
+    "title": "Локомотив близок к лёгкой группе в ЛЧ.",
+    "text": "Москвичам помог массовый вылет фаворитов из Лиги чемпионов. У России есть прекрасный шанс проявить себя в главном турнире Европы."
+  },
+  {
+    "id": 2,
+    "news_date": "2019-08-14T00:00:00.000Z",
+    "title": "Новый соперник Краснодара слабее Порту.",
+    "text": "Главное, что нужно знать об Олимпиакосе — команде, которая стоит на пути Краснодара в групповой раунд ЛЧ."
+  },
+  {
+    "id": 3,
+    "news_date": "2019-08-14T00:00:00.000Z",
+    "title": "Зе Луиш едва не лишил Краснодар победы.",
+    "text": "Забил им чуть ли не больше всех. Ну и ладно!"
+  },
+  {
+    "id": 4,
+    "news_date": "2019-08-14T00:00:00.000Z",
+    "title": "22 пенальти в Копенгагене.",
+    "text": "Двум игрокам пришлось выходить к 11-метровой отметке по два раза. Об этом и другом – в обзоре новостей дня."
+  },
+  {
+    "id": 5,
+    "news_date": "2019-08-20T00:00:00.000Z",
+    "title": "Маклаков: верю, что победа «Спартака» над ЦСКА — шаг к чемпионств.",
+    "text": "Известный актёр и болельщик «Спартака» Алексей Маклаков прокомментировал победу красно-белых со счётом 2:1 в домашнем матче 6-го тура Российской Премьер-Лиги с ЦСКА."
+  },
+  {
+    "id": 6,
+    "news_date": "2019-08-20T00:00:00.000Z",
+    "title": "Чего ждать от «Спартака» в этом сезоне РПЛ?",
+    "text": "Московский «Спартак» одержал победу в матче 6-го тура Российской Премьер-Лиги с ЦСКА (2:1). После шести туров красно-белые занимают четвёртое место в турнирной таблице первенства с 11 очками в активе."
+  }
+];
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -155,34 +193,44 @@ class Profile extends React.Component {
                     </Row>
                   </div>
                 </div>
+                <h3 className="text-center">Новости БФЛ</h3>
                 <div className="news_block">
                   <Row>
-                    <Col sm="4" className="d-flex justify-content-center">
-                      <NewsBox/>
-                    </Col>
-                    <Col sm="4" className="d-flex justify-content-center">
-                      <NewsBox/>
-                    </Col>
-                    <Col sm="4" className="d-flex justify-content-center">
-                      <NewsBox/>
-                    </Col>
+                    {news.map(item =>
+                      <Col key={item.id} sm="6" lg="4" className="d-flex justify-content-center">
+                          <NewsBox
+                            link={`/news-page/${item.id}`}
+                            title={item.title}
+                            newsDate={item.news_date}
+                            likes="10"
+                            comments="5"
+                            backgroundImg="https://via.placeholder.com/280"
+                          />
+                      </Col>
+                    )}
+                    {/*<Col sm="4" className="d-flex justify-content-center">*/}
+                    {/*  <NewsBox/>*/}
+                    {/*</Col>*/}
+                    {/*<Col sm="4" className="d-flex justify-content-center">*/}
+                    {/*  <NewsBox/>*/}
+                    {/*</Col>*/}
                   </Row>
-                  <Row>
-                    <Col sm="4" className="d-flex justify-content-center">
-                      <NewsBox/>
-                    </Col>
-                    <Col sm="4" className="d-flex justify-content-center">
-                      <NewsBox/>
-                    </Col>
-                    <Col sm="4" className="d-flex justify-content-center">
-                      <NewsBox/>
-                    </Col>
-                  </Row>
+                  {/*<Row>*/}
+                  {/*  <Col sm="4" className="d-flex justify-content-center">*/}
+                  {/*    <NewsBox/>*/}
+                  {/*  </Col>*/}
+                  {/*  <Col sm="4" className="d-flex justify-content-center">*/}
+                  {/*    <NewsBox/>*/}
+                  {/*  </Col>*/}
+                  {/*  <Col sm="4" className="d-flex justify-content-center">*/}
+                  {/*    <NewsBox/>*/}
+                  {/*  </Col>*/}
+                  {/*</Row>*/}
                   <Row className="justify-content-center my-3">
                     <Col lg="9" className="d-flex justify-content-center">
                       <Button
-                      outline
-                      color="primary"
+                        outline
+                        color="primary"
                       >
                         Смотреть все
                       </Button>
