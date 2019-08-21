@@ -20,6 +20,8 @@ import {
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
+import { AvForm, AvField } from 'availity-reactstrap-validation';
+
 
 class Register extends React.Component {
   componentDidMount() {
@@ -72,7 +74,8 @@ class Register extends React.Component {
                       <div className="text-center text-muted mb-4">
                         <small>Регистрация учетной записи</small>
                       </div>
-                      <Form role="form">
+
+                      <AvForm role="form">
                         <FormGroup>
                           <InputGroup className="input-group-alternative mb-3">
                             <InputGroupAddon addonType="prepend">
@@ -80,7 +83,16 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Никнейм" type="text" />
+                              <AvField
+                                  name="name"
+                                  type="text"
+                                  errorMessage="Invalid name"
+                                  placeholder="Никнейм"
+                                  validate={{
+                                      required: {value: true},
+                                      pattern: {value: '^[A-Za-z0-9]+$'},
+                                  }}
+                              />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -90,7 +102,11 @@ class Register extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                              <AvField
+                                  name="email"
+                                  type="email"
+                                  placeholder="Email"
+                              />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -100,11 +116,12 @@ class Register extends React.Component {
                                 <i className="ni ni-lock-circle-open" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input
-                              placeholder="Пароль"
-                              type="password"
-                              autoComplete="off"
-                            />
+                              <AvField
+                                  name="password"
+                                  type="password"
+                                  minLength={7}
+                                  placeholder="Пароль"
+                              />
                           </InputGroup>
                         </FormGroup>
                         <div className="text-muted font-italic">
@@ -149,7 +166,7 @@ class Register extends React.Component {
                             Создать аккаунт
                           </Button>
                         </div>
-                      </Form>
+                      </AvForm>
                     </CardBody>
                   </Card>
                 </Col>

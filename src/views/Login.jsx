@@ -20,6 +20,7 @@ import {
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 class Login extends React.Component {
   componentDidMount() {
@@ -86,7 +87,8 @@ class Login extends React.Component {
                       <div className="text-center text-muted mb-4">
                         <small>Войти используя учетные данные</small>
                       </div>
-                      <Form role="form">
+
+                      <AvForm role="form">
                         <FormGroup className="mb-3">
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
@@ -94,21 +96,27 @@ class Login extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                            <AvField
+                                name="email"
+                                type="email"
+                                placeholder="Email"
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
+
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
                               <InputGroupText>
                                 <i className="ni ni-lock-circle-open" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input
-                              placeholder="Пароль"
-                              type="password"
-                              autoComplete="off"
-                            />
+                              <AvField
+                                  name="password"
+                                  type="password"
+                                  minLength={7}
+                                  placeholder="Пароль"
+                              />
                           </InputGroup>
                         </FormGroup>
                         <div className="custom-control custom-control-alternative custom-checkbox">
@@ -133,7 +141,8 @@ class Login extends React.Component {
                             Войти
                           </Button>
                         </div>
-                      </Form>
+                      </AvForm>
+
                     </CardBody>
                   </Card>
                   <Row className="mt-3">
