@@ -7,6 +7,8 @@ import {
   CardFooter,
   CardLink,
   CardTitle,
+  CardImg,
+  CardImgOverlay,
 } from "reactstrap";
 
 class NewsBox extends React.Component {
@@ -18,21 +20,21 @@ class NewsBox extends React.Component {
     const newsBoxStyle = {
       // width: "280px",
       // height: "215px",
-      backgroundImage: `url("${backgroundImg}")`,
-      // backgroundImage: "url(" + require("assets/img/theme/img-slider-02.jpg") + ")",
+      // backgroundImage: "url(" + require("assets/img/news/" + backgroundImg + ".jpg") + ")",
+      backgroundImage: `url(${backgroundImg})`,
       // backgroundImage: "url('https://via.placeholder.com/280')",
-      // backgroundPosition: "center",
-      // backgroundSize: "cover"
-      // backgroundSize: "400px"
     };
 
     return (
       <div>
         <Card className="news_box shadow border-0 m-2">
           <Link to={link} params={{"title": title}} className="news_box__link">
-            <CardBody style={newsBoxStyle} className="news_box__body py-3">
+            <CardImg className="news_box__img" width="100%" src={backgroundImg}/>
+            <CardImgOverlay className="news_box__body py-3">
+            {/*<CardBody className="news_box__body py-3">*/}
               <CardTitle className="text-white">{title}</CardTitle>
-            </CardBody>
+            {/*</CardBody>*/}
+            </CardImgOverlay>
           </Link>
           <CardFooter>
             <span className="text-muted">{publicDate.toLocaleDateString()}</span>
