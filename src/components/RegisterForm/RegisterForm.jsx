@@ -1,7 +1,7 @@
 import React from "react";
 import OktaAuth from '@okta/okta-auth-js';
 import {withAuth} from '@okta/okta-react';
-import axios from 'axios';
+// import axios from 'axios';
 
 // okta config file
 import config from '../../app.config';
@@ -26,7 +26,8 @@ class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
       sessionToken: null
@@ -46,8 +47,12 @@ class RegisterForm extends React.Component {
     }
   };
 
-  handleUserNameChange = (e) => {
-    this.setState({userName: e.target.value});
+  handleFirstNameChange = (e) => {
+    this.setState({firstName: e.target.value});
+  };
+
+  handleLastNameChange = (e) => {
+    this.setState({lastName: e.target.value});
   };
 
   handleEmailChange = (e) => {
@@ -60,17 +65,16 @@ class RegisterForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    axios({
-      method: 'post',
-      url: '/useradd',
+    fetch('https://fantasy-bfl.herokuapp.com/users',{
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      data: JSON.stringify(this.state)
+      body: JSON.stringify(this.state)
     }).then(user => {
       this.oktaAuth.signIn({
-        username: this.state.userName,
+        username: this.state.email,
         password: this.state.password
       })
         .then(res => this.setState({
@@ -118,10 +122,23 @@ class RegisterForm extends React.Component {
                       <i className="ni ni-hat-3"/>
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Никнейм"
+                  <Input placeholder="Имя"
                          type="text"
-                         value={this.state.userName}
-                         onChange={this.handleUserNameChange}/>
+                         value={this.state.firstName}
+                         onChange={this.handleFirstNameChange}/>
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-hat-3"/>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input placeholder="Фамилия"
+                         type="text"
+                         value={this.state.lastName}
+                         onChange={this.handleLastNameChange}/>
                 </InputGroup>
               </FormGroup>
               <FormGroup>

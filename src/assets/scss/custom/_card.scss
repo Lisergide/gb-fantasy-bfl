@@ -1,115 +1,133 @@
 .card {
-    position: relative;
+  position: relative;
 }
 
 .profile-page {
-    .card-profile {
-        margin-top: -150px;
+  .card-profile {
+    margin-top: -150px;
 
-        .card-profile-image {
-            position: relative;
-            //min-height: 130px;
+    .card-profile-image {
+      position: relative;
+      //min-height: 130px;
 
-            img {
-                max-width: 180px;
-                border-radius: $border-radius;
-                // @extend .shadow;
-                transform: translate(-50%,-30%);
-                position: absolute;
-                left: 50%;
-                transition: $transition-base;
+      img {
+        max-width: 180px;
+        border-radius: $border-radius;
+        // @extend .shadow;
+        transform: translate(-50%, -30%);
+        position: absolute;
+        left: 50%;
+        transition: $transition-base;
 
-                &:hover {
-                    transform: translate(-50%, -33%);
-                }
-            }
+        &:hover {
+          transform: translate(-50%, -33%);
         }
-
-        .card-profile-stats {
-            padding: 1rem 0;
-
-            > div {
-                text-align: center;
-                margin-right: 1rem;
-                padding: .875rem;
-
-                &:last-child {
-                    margin-right: 0;
-                }
-
-                .heading {
-                    font-size: 1.1rem;
-                    font-weight: bold;
-                    display: block;
-                }
-                .description {
-                    font-size: .875rem;
-                    color: $gray-500;
-                }
-            }
-        }
-
-        .card-profile-actions {
-            padding: .875rem;
-        }
-
-        @include media-breakpoint-down(xs) {
-            .card-profile-actions {
-                margin-top: 110px;
-            } 
-        }
-
-        @include media-breakpoint-between(sm, md) {
-            .card-profile-stats {
-                margin-top: 65px;
-            }
-        }
+      }
     }
+
+    .card-profile-stats {
+      padding: 1rem 0;
+
+      > div {
+        text-align: center;
+        margin-right: 1rem;
+        padding: .875rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .heading {
+          font-size: 1.1rem;
+          font-weight: bold;
+          display: block;
+        }
+
+        .description {
+          font-size: .875rem;
+          color: $gray-500;
+        }
+      }
+    }
+
+    .card-profile-actions {
+      padding: .875rem;
+    }
+
+    @include media-breakpoint-down(xs) {
+      .card-profile-actions {
+        margin-top: 110px;
+      }
+    }
+
+    @include media-breakpoint-between(sm, md) {
+      .card-profile-stats {
+        margin-top: 65px;
+      }
+    }
+  }
 }
 
 // Card with blockquotes
 
 .card {
-    .card-blockquote {
-        padding: 2rem;
-        position: relative;
+  .card-blockquote {
+    padding: 2rem;
+    position: relative;
 
-        .svg-bg {
-            display: block;
-            width: 100%;
-            height: 95px;
-            position: absolute;
-            top: -94px;
-            left: 0;
-        }
+    .svg-bg {
+      display: block;
+      width: 100%;
+      height: 95px;
+      position: absolute;
+      top: -94px;
+      left: 0;
     }
+  }
 }
 
 // Animated cards
 
 .card-lift--hover {
-    &:hover {
-        transform: translateY(-20px);
-        @include transition($transition-base);
-    }
+  &:hover {
+    transform: translateY(-20px);
+    @include transition($transition-base);
+  }
 }
 
 // Custom news box user element
 .news_box {
+  &__link {
+    width: 100%;
+    height: 100%;
+    float: left;
     overflow: hidden;
+    position: relative;
+  }
 
-    &__body {
-        width: 280px;
-        height: 215px;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        transition: all 1s ease;
-        -webkit-transition: all 1s ease;
-        -moz-transition: all 1s ease;
-    }
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+  }
 
-    &__body:hover {
-        background-size: 110%;
-    }
+  &__img {
+    display: block;
+    position: relative;
+    transition: all .4s linear;
+    -webkit-transition: all .4s linear;
+
+  }
+
+  &__link:hover &__img {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
 }

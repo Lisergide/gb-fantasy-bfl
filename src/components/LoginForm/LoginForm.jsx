@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
     this.state = {
       sessionToken: null,
       error: null,
-      email: '',
+      username: '',
       password: ''
     };
     this.oktaAuth = new OktaAuth({url: config.url});
@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.oktaAuth.signIn({
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password
     })
       .then(res => this.setState({
@@ -48,8 +48,8 @@ class LoginForm extends React.Component {
       });
   };
 
-  handleEmailChange = (e) => {
-    this.setState({email: e.target.value});
+  handleUsernameChange = (e) => {
+    this.setState({username: e.target.value});
   };
 
   handlePasswordChange = (e) => {
@@ -94,10 +94,10 @@ class LoginForm extends React.Component {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Email"
+                    placeholder="Username"
                     type="email"
-                    value={this.state.email}
-                    onChange={this.handleEmailChange}/>
+                    value={this.state.username}
+                    onChange={this.handleUsernameChange}/>
                 </InputGroup>
               </FormGroup>
               <FormGroup>

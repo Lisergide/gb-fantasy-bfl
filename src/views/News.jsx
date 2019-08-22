@@ -20,7 +20,7 @@ class News extends React.Component {
   }
 
   render() {
-    const { title, text } = this.props;
+    const { title, text } = this.props.location;
     return (
       <>
         <Header/>
