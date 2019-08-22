@@ -13,7 +13,7 @@ export default [
     component: Home,
   },
   {
-    path: '/landing-pag',
+    path: '/landing-page',
     exact: true,
     component: Landing,
   },

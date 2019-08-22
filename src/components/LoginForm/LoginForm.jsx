@@ -21,7 +21,7 @@ import {
   Col
 } from "reactstrap";
 
-class LoginForm extends React.Component {
+export default withAuth(class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,6 +61,11 @@ class LoginForm extends React.Component {
       this.props.auth.redirect({sessionToken: this.state.sessionToken});
       return null;
     }
+
+    const errorMessage = this.state.error ?
+      <span className="text-center text-danger">{this.state.error}</span> :
+      null;
+
     return (
       <>
         <Card className="bg-secondary shadow border-0">
@@ -79,6 +84,7 @@ class LoginForm extends React.Component {
                 </span>
                 <span className="btn-inner--text">Vk</span>
               </Button>
+              {errorMessage}
             </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
@@ -95,7 +101,7 @@ class LoginForm extends React.Component {
                   </InputGroupAddon>
                   <Input
                     placeholder="Username"
-                    type="email"
+                    type="text"
                     value={this.state.username}
                     onChange={this.handleUsernameChange}/>
                 </InputGroup>
@@ -126,8 +132,7 @@ class LoginForm extends React.Component {
               </div>
               <div className="text-center">
                 <Button className="my-4"
-                        color="primary"
-                        type="submit">
+                        color="primary">
                   Войти
                 </Button>
               </div>
@@ -154,5 +159,5 @@ class LoginForm extends React.Component {
     );
   }
 }
-
-export default withAuth(LoginForm);
+)
+// export default withAuth(LoginForm);

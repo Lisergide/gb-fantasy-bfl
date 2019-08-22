@@ -14,14 +14,20 @@ import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import LoginForm from "components/LoginForm/LoginForm";
 
-class Login extends React.Component {
+export default withAuth(class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      authenticated: null
-    };
+    this.state = {authenticated: null};
+    this.checkAuthentication = this.checkAuthentication.bind(this);
     this.checkAuthentication();
   }
+
+    async checkAuthentication() {
+      const authenticated = await this.props.auth.isAuthenticated();
+      if (authenticated !== this.state.authenticated) {
+        this.setState({authenticated});
+      }
+    }
 
   componentDidMount() {
     document.documentElement.scrollTop = 0;
@@ -33,17 +39,12 @@ class Login extends React.Component {
     this.checkAuthentication();
   }
 
-  checkAuthentication = async () => {
-    const authenticated = await this.props.auth.isAuthenticated();
-    if (authenticated !== this.state.authenticated) {
-      this.setState({authenticated});
-    }
-  };
+
 
   render() {
     if (this.state.authenticated === null) return null;
     return this.state.authenticated
-      ? <Redirect to={{pathname: "/register-page"}}/>
+      ? <Redirect to={{pathname: "/profile-page"}}/>
       : <>
         <Header/>
         <main ref="main">
@@ -71,5 +72,5 @@ class Login extends React.Component {
       </>
   }
 }
-
-export default withAuth(Login);
+)
+// export default withAuth(Login);

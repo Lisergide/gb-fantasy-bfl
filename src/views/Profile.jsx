@@ -8,7 +8,7 @@ import {Button, Card, Container, Row, Col} from "reactstrap";
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 
-class Profile extends React.Component {
+export default withAuth(class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,17 +17,17 @@ class Profile extends React.Component {
     this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
-  getCurrentUser() {
+  async getCurrentUser(){
     this.props.auth.getUser()
       .then(user => this.setState({user}));
-  }
+  };
 
   componentDidMount() {
     this.getCurrentUser();
 
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
+    // this.refs.main.scrollTop = 0;
   }
 
   render() {
@@ -128,22 +128,6 @@ class Profile extends React.Component {
                       University of Computer Science
                     </div>
                   </div>
-                  <div className="mt-5 py-5 border-top text-center">
-                    <Row className="justify-content-center">
-                      <Col lg="9">
-                        <p>
-                          An artist of considerable range, Ryan — the name taken
-                          by Melbourne-raised, Brooklyn-based Nick Murphy —
-                          writes, performs and records all of his own music,
-                          giving it a warm, intimate feel with a solid groove
-                          structure. An artist of considerable range.
-                        </p>
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                          Show more
-                        </a>
-                      </Col>
-                    </Row>
-                  </div>
                 </div>
               </Card>
             </Container>
@@ -154,5 +138,5 @@ class Profile extends React.Component {
     );
   }
 }
-
-export default withAuth(Profile);
+)
+// export default withAuth(Profile);

@@ -12,8 +12,8 @@ export default class App extends React.Component {
       <>
         <Switch>
           {routes.map((route, idx) => <Route key={idx} {...route}/>)}
-          {secureRoutes.map((route, idx) => <SecureRoute key={idx} {...secureRoutes}/>)}
           <Route path="/implicit/callback" component={ImplicitCallback}/>
+          {secureRoutes.map((route, idx) => <SecureRoute key={idx} {...secureRoutes}/>)}
           <Redirect to="/"/>
         </Switch>
       </>

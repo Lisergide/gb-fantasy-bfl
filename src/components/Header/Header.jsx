@@ -24,14 +24,22 @@ import {
   // UncontrolledTooltip
 } from "reactstrap";
 
-class Header extends React.Component {
+export default withAuth(class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {authenticated: null};
+    this.checkAuthentication = this.checkAuthentication.bind(this);
     this.checkAuthentication();
   }
 
-  componentDidMount() {
+    async checkAuthentication() {
+      const authenticated = await this.props.auth.isAuthenticated();
+      if (authenticated !== this.state.authenticated) {
+        this.setState({authenticated});
+      }
+    };
+
+    componentDidMount() {
     let headroom = new Headroom(document.getElementById("navbar-main"));
     // initialise
     headroom.init();
@@ -40,13 +48,6 @@ class Header extends React.Component {
   componentDidUpdate() {
     this.checkAuthentication();
   }
-
-  checkAuthentication = async () => {
-    const authenticated = await this.props.auth.isAuthenticated();
-    if (authenticated !== this.state.authenticated) {
-      this.setState({authenticated});
-    }
-  };
 
   render() {
     // if (this.state.authenticated === null) return null;
@@ -166,7 +167,7 @@ class Header extends React.Component {
                   {this.state.authenticated
                     ? <>
                       <NavItem>
-                        <NavLink href="/javascript:void(0)" onClick={this.props.auth.logout}>
+                        <NavLink href="javascript:void(0)" onClick={() => {this.props.auth.logout()}}>
                           <i className="fas fa-sign-out-alt d-lg-none mr-1"/>
                           <span className="nav-link-inner--text">Выход</span>
                         </NavLink>
@@ -180,7 +181,7 @@ class Header extends React.Component {
                     </>
                     : <>
                       <NavItem>
-                        <NavLink href="/login-page" onClick={this.props.auth.login}>
+                        <NavLink href="javascript:void(0)" onClick={() => {this.props.auth.login()}}>
                           <i className="fas fa-sign-in-alt d-lg-none mr-1"/>
                           <span className="nav-link-inner--text">Вход</span>
                         </NavLink>
@@ -218,5 +219,5 @@ class Header extends React.Component {
     );
   }
 }
-
-export default withAuth(Header);
+)
+// export default withAuth(Header);

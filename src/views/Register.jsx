@@ -1,4 +1,5 @@
 import React from "react";
+import { withAuth } from '@okta/okta-react';
 
 // reactstrap components
 import {
@@ -11,16 +12,36 @@ import {
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import RegisterForm from "components/RegisterForm/RegisterForm";
+import {Redirect} from "react-router";
 
-class Register extends React.Component {
+export default withAuth(class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { authenticated: null };
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
+  }
+
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
+    }
+  }
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
+    // this.refs.main.scrollTop = 0;
+  }
+
+  componentDidUpdate() {
+    this.checkAuthentication();
   }
 
   render() {
-    return (
+    if(this.state.authenticated === null) return null;
+    return !this.state.authenticated ? (
       <>
         <Header/>
         <main ref="main">
@@ -46,8 +67,9 @@ class Register extends React.Component {
         </main>
         <Footer/>
       </>
-    );
+    )
+      : <Redirect to={{ pathname: '/profile-page'}} />
   }
-}
+})
 
-export default Register;
+// export default Register;
