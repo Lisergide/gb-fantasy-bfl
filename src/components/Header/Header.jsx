@@ -167,29 +167,29 @@ export default withAuth(class Header extends React.Component {
                   {this.state.authenticated
                     ? <>
                       <NavItem>
-                        <NavLink href="javascript:void(0)" onClick={() => {this.props.auth.logout()}}>
-                          <i className="fas fa-sign-out-alt d-lg-none mr-1"/>
-                          <span className="nav-link-inner--text">Выход</span>
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
                         <NavLink to="/profile-page" tag={Link}>
                           <i className="fas fa-user d-lg-none mr-1"/>
                           <span className="nav-link-inner--text">Профиль</span>
                         </NavLink>
                       </NavItem>
-                    </>
-                    : <>
                       <NavItem>
-                        <NavLink href="javascript:void(0)" onClick={() => {this.props.auth.login()}}>
-                          <i className="fas fa-sign-in-alt d-lg-none mr-1"/>
-                          <span className="nav-link-inner--text">Вход</span>
+                        <NavLink href="javascript:void(0)" onClick={() => {this.props.auth.logout()}}>
+                          <i className="fas fa-sign-out-alt d-lg-none mr-1"/>
+                          <span className="nav-link-inner--text">Выход</span>
                         </NavLink>
                       </NavItem>
+                    </>
+                    : <>
                       <NavItem>
                         <NavLink to="/register-page" tag={Link}>
                           <i className="far fa-edit d-lg-none mr-1"/>
                           <span className="nav-link-inner--text">Регистрация</span>
+                        </NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink href="javascript:void(0)" onClick={() => {this.props.auth.login()}}>
+                          <i className="fas fa-sign-in-alt d-lg-none mr-1"/>
+                          <span className="nav-link-inner--text">Вход</span>
                         </NavLink>
                       </NavItem>
                     </>

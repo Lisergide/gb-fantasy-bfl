@@ -11,9 +11,7 @@ import Footer from "components/Footer/Footer.jsx";
 export default withAuth(class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: null
-    };
+    this.state = { user: null };
     this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
@@ -70,7 +68,7 @@ export default withAuth(class Profile extends React.Component {
                         <a href="#pablo" onClick={e => e.preventDefault()}>
                           <img alt="..."
                             className="rounded-circle"
-                            src={require("assets/img/theme/team-4-800x800.jpg")}/>
+                            src={require("assets/img/theme/team-5-800x800.jpg")}/>
                         </a>
                       </div>
                     </Col>
@@ -113,19 +111,11 @@ export default withAuth(class Profile extends React.Component {
                   <div className="text-center mt-5">
                     <h3>
                       {this.state.user.name}{" "}
-                      <span className="font-weight-light">, 27</span>
+                      <span className="font-weight-light">, 29</span>
                     </h3>
                     <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2"/>
-                      Bucharest, Romania
-                    </div>
-                    <div className="h6 mt-4">
-                      <i className="ni business_briefcase-24 mr-2"/>
-                      Solution Manager - Creative Tim Officer
-                    </div>
-                    <div>
-                      <i className="ni education_hat mr-2"/>
-                      University of Computer Science
+                      Moscow, Russia
                     </div>
                   </div>
                 </div>

@@ -41,7 +41,7 @@ class Home extends React.Component {
 
   render() {
     const { news } = this.state;
-    console.log(news);
+    // console.log(news);
     return (
       <>
         <Header/>

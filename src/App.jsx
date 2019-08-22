@@ -4,7 +4,8 @@ import {SecureRoute, ImplicitCallback} from '@okta/okta-react';
 
 // routes
 import routes from './routes';
-import secureRoutes from './secureRoutes';
+// import secureRoutes from './secureRoutes';
+import Profile from 'views/Profile';
 
 export default class App extends React.Component {
   render() {
@@ -13,7 +14,8 @@ export default class App extends React.Component {
         <Switch>
           {routes.map((route, idx) => <Route key={idx} {...route}/>)}
           <Route path="/implicit/callback" component={ImplicitCallback}/>
-          {secureRoutes.map((route, idx) => <SecureRoute key={idx} {...secureRoutes}/>)}
+          {/*{secureRoutes.map((route, idx) => <SecureRoute key={idx} {...secureRoutes}/>)}*/}
+          <SecureRoute path="/profile-page" component={Profile}/>
           <Redirect to="/"/>
         </Switch>
       </>
