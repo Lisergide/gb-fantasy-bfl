@@ -20,7 +20,7 @@ class News extends React.Component {
   }
 
   render() {
-    const { title, text } = this.props.location;
+    const {title, text} = this.props.location;
     return (
       <>
         <Header/>
@@ -58,16 +58,24 @@ class News extends React.Component {
               <Card className="card-profile shadow mt--300 pb-5">
                 <div className="px-4">
                   <Row className="justify-content-center">
-                    <Col className="order-lg-2" lg="3">
+                    <Col>
                       <div>
-                        <h3>{title}</h3>
+                        <h3 className="text-center">Title</h3>
+                      </div>
+                      <div className="d-flex justify-content-center mb-3">
+                        <img src="https://via.placeholder.com/800x400" alt=""/>
                       </div>
                       <div>
-                        <img src="https://via.placeholder.com/280" alt=""/>
-                      </div>
-                      <div>
-                        <p>
-                          {text}
+                        <p className="text-center">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
+                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
+                          sed sint veniam vero, voluptate voluptatibus?
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
+                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
+                          sed sint veniam vero, voluptate voluptatibus?
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
+                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
+                          sed sint veniam vero, voluptate voluptatibus?
                         </p>
                       </div>
                     </Col>

@@ -11,15 +11,12 @@ import {
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Row,
   Col
 } from "reactstrap";
+
+// avality reactstrap validation component
+import {AvForm, AvField} from 'availity-reactstrap-validation';
 
 export default withAuth(class LoginForm extends React.Component {
   constructor(props) {
@@ -69,58 +66,51 @@ export default withAuth(class LoginForm extends React.Component {
     return (
       <>
         <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-white pb-5">
-            <div className="text-muted text-center mb-3">
-              <small>Вход через социальные сети</small>
-            </div>
-            <div className="btn-wrapper text-center">
-              <Button className="btn-neutral btn-icon"
-                      color="default"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}>
-                <span className="btn-inner--icon mr-1">
-                  <img alt="..."
-                       src={require("assets/img/icons/common/vk.svg")}/>
-                </span>
-                <span className="btn-inner--text">Vk</span>
-              </Button>
-              {errorMessage}
-            </div>
-          </CardHeader>
+          {/*<CardHeader className="bg-white pb-5">*/}
+          {/*  <div className="text-muted text-center mb-3">*/}
+          {/*    <small>Вход через социальные сети</small>*/}
+          {/*  </div>*/}
+          {/*  <div className="btn-wrapper text-center">*/}
+          {/*    <Button className="btn-neutral btn-icon"*/}
+          {/*            color="default"*/}
+          {/*            href="#pablo"*/}
+          {/*            onClick={e => e.preventDefault()}>*/}
+          {/*      <span className="btn-inner--icon mr-1">*/}
+          {/*        <img alt="..."*/}
+          {/*             src={require("assets/img/icons/common/vk.svg")}/>*/}
+          {/*      </span>*/}
+          {/*      <span className="btn-inner--text">Vk</span>*/}
+          {/*    </Button>*/}
+          {/*    {errorMessage}*/}
+          {/*  </div>*/}
+          {/*</CardHeader>*/}
+          <CardHeader>{errorMessage}</CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Войти используя учетные данные</small>
             </div>
-            <Form role="form" onSubmit={this.handleSubmit}>
-              <FormGroup className="mb-3">
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83"/>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
+            <AvForm role="form" onValidSubmit={this.handleSubmit}>
+              <div className="form_wrapper">
+                <span className="form_icon"><i className="ni ni-single-02"/></span>
+                  <AvField
+                    className="input-group-alternative mb-1"
+                    name="username"
                     placeholder="Username"
                     type="text"
                     value={this.state.username}
                     onChange={this.handleUsernameChange}/>
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open"/>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
+              </div>
+              <div className="form_wrapper">
+                <span className="form_icon"><i className="ni ni-lock-circle-open"/></span>
+                  <AvField
+                    className="input-group-alternative mb-1"
+                    name="password"
                     placeholder="Пароль"
                     type="password"
                     autoComplete="off"
                     value={this.state.password}
                     onChange={this.handlePasswordChange}/>
-                </InputGroup>
-              </FormGroup>
+              </div>
               <div className="custom-control custom-control-alternative custom-checkbox">
                 <input className="custom-control-input"
                        id=" customCheckLogin"
@@ -136,7 +126,7 @@ export default withAuth(class LoginForm extends React.Component {
                   Войти
                 </Button>
               </div>
-            </Form>
+            </AvForm>
           </CardBody>
         </Card>
         <Row className="mt-3">

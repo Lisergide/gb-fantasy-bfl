@@ -137,3 +137,16 @@ textarea[resize="horizontal"] {
         }
     }
 }
+
+.form_wrapper {
+    display: flex;
+
+    .form_icon {
+        line-height: 50px;
+        padding-right: 15px;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+}
