@@ -31,7 +31,6 @@ export default withAuth(class LoginForm extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
     this.oktaAuth.signIn({
       username: this.state.username,
       password: this.state.password
