@@ -14,6 +14,7 @@ import {
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import NewsBox from "components/NewsBox/NewsBox";
+import NewsAdminModal from "components/NewsAdminModal/NewsAdminModal";
 
 class Home extends React.Component {
   constructor(props) {
@@ -28,8 +29,7 @@ class Home extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
 
-    axios
-        .get("https://fantasy-bfl.herokuapp.com/news")
+    axios.get("https://fantasy-bfl.herokuapp.com/news")
         .then(res => {
           const data = res.data.results;
           this.setState({ news: data });
@@ -78,11 +78,11 @@ class Home extends React.Component {
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
                         <a href="#pablo" onClick={e => e.preventDefault()}>
-                          <img
-                            alt="..."
-                            // className="rounded-circle"
-                            src={require("assets/img/brand/bflmafia_logo.png")}
-                          />
+                          {/*<img*/}
+                          {/*  alt="..."*/}
+                          {/*  // className="rounded-circle"*/}
+                          {/*  src={require("assets/img/brand/bflmafia_logo.png")}*/}
+                          {/*/>*/}
                         </a>
                       </div>
                     </Col>

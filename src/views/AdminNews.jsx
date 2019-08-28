@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -7,17 +8,18 @@ import {
   Container,
   Row,
   Col,
+  Media
 } from "reactstrap";
 
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 
-class News extends React.Component {
+class AdminNews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      news: {}
+      news: []
     };
   }
 
@@ -26,8 +28,7 @@ class News extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
 
-    const { match } = this.props;
-    axios.get(`https://fantasy-bfl.herokuapp.com/news/${match.params.id}`)
+    axios.get("https://fantasy-bfl.herokuapp.com/news")
       .then(res => {
         const data = res.data.results;
         this.setState({ news: data });
@@ -38,7 +39,7 @@ class News extends React.Component {
   }
 
   render() {
-    // const {title, text} = this.props.location;
+    const {news} = this.state;
     return (
       <>
         <Header/>
@@ -77,25 +78,20 @@ class News extends React.Component {
                 <div className="px-4">
                   <Row className="justify-content-center">
                     <Col>
-                      <div>
-                        <h3 className="text-center">Title</h3>
-                      </div>
-                      <div className="d-flex justify-content-center mb-3">
-                        <img src="https://via.placeholder.com/800x400" alt=""/>
-                      </div>
-                      <div>
-                        <p className="text-center">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
-                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
-                          sed sint veniam vero, voluptate voluptatibus?
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
-                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
-                          sed sint veniam vero, voluptate voluptatibus?
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
-                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
-                          sed sint veniam vero, voluptate voluptatibus?
-                        </p>
-                      </div>
+                      {news.map(item =>
+                        <Media key={item.id} className="border rounded p-2 my-3">
+                          <Media left href="#">
+                            <Media object src="https://via.placeholder.com/64x64" alt="News image" />
+                          </Media>
+                          <Media body>
+                            <Media heading tag="h6">
+                              <Link to={`/news/${item.id}`}>
+                                {item.title}
+                              </Link>
+                            </Media>
+                          </Media>
+                        </Media>
+                      )}
                     </Col>
                   </Row>
                 </div>
@@ -109,4 +105,4 @@ class News extends React.Component {
   }
 }
 
-export default News;
+export default AdminNews;

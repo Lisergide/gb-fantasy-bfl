@@ -162,6 +162,17 @@ export default withAuth(class Header extends React.Component {
                       </span>
                     </NavLink>
                   </NavItem>
+                  <UncontrolledDropdown nav>
+                    <DropdownToggle nav>
+                      <i className="fas fa-users-cog d-lg-none mr-1"/>
+                      <span className="nav-link-inner--text">Администрирование</span>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem to="/admin/news" tag={Link}>
+                        Новости
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                 </Nav>
                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
                   {this.state.authenticated

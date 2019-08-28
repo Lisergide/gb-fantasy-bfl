@@ -5,6 +5,7 @@ import Login from "views/Login";
 import Register from "views/Register";
 import Fantasy from "views/Fantasy";
 import News from "views/News";
+import AdminNews from "views/AdminNews";
 
 export default [
   {
@@ -36,5 +37,10 @@ export default [
     path: '/news-page/:id',
     exact: true,
     component: News,
+  },
+  {
+    path: '/admin/news',
+    exact: true,
+    component: AdminNews,
   }
 ]
