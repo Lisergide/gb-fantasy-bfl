@@ -28,13 +28,15 @@ class NewsBox extends React.Component {
           </Link>
           <CardFooter>
             <span className="text-muted">{publicDate.toLocaleDateString()}</span>
-            <CardLink className="text-muted float-right ml-3" href="#">
-              <i className="far fa-thumbs-up"/>
-              <span className="pl-1">{likes}</span>
+            <CardLink className="text-danger float-right ml-3" href="#">
+              <i className="fas fa-trash-alt"/>
+              {/*<i className="far fa-thumbs-up"/>*/}
+              {/*<span className="pl-1">{likes}</span>*/}
             </CardLink>
-            <CardLink className="text-muted float-right ml-3" href="#">
-              <i className="far fa-comment-alt"/>
-              <span className="pl-1">{comments}</span>
+            <CardLink className="text-primary float-right ml-3" href="#">
+              <i className="fas fa-edit"/>
+              {/*<i className="far fa-comment-alt"/>*/}
+              {/*<span className="pl-1">{comments}</span>*/}
             </CardLink>
           </CardFooter>
         </Card>

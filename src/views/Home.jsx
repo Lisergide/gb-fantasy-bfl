@@ -7,14 +7,14 @@ import {
   Card,
   Container,
   Row,
-  Col,
+  Col, CardImg, CardImgOverlay, CardTitle, CardFooter, CardLink,
 } from "reactstrap";
 
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import NewsBox from "components/NewsBox/NewsBox";
-import NewsAdminModal from "components/NewsAdminModal/NewsAdminModal";
+import {Link} from "react-router-dom";
 
 class Home extends React.Component {
   constructor(props) {
@@ -77,13 +77,13 @@ class Home extends React.Component {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                          <img
-                            alt="..."
-                            // className="rounded-circle"
-                            src={require("assets/img/brand/bflmafia_logo.png")}
-                          />
-                        </a>
+                        {/*<a href="#pablo" onClick={e => e.preventDefault()}>*/}
+                        {/*  <img*/}
+                        {/*    alt="..."*/}
+                        {/*    // className="rounded-circle"*/}
+                        {/*    src={require("assets/img/brand/bflmafia_logo.png")}*/}
+                        {/*  />*/}
+                        {/*</a>*/}
                       </div>
                     </Col>
                     <Col className="order-lg-3 text-lg-right align-self-lg-center"
@@ -124,7 +124,7 @@ class Home extends React.Component {
                   </Row>
                   <div className="text-center mt-5">
                     <h3>
-                      Брянская Футбольгая Лига{" "}
+                      {/*Брянская Футбольгая Лига{" "}*/}
                       {/* <span className="font-weight-light">, 27</span> */}
                     </h3>
                     {/* <div className="h6 font-weight-300">
@@ -173,8 +173,8 @@ class Home extends React.Component {
                             link={`/news-page/${item.id}`}
                             title={item.title}
                             newsDate={item.news_date}
-                            likes="10"
-                            comments="5"
+                            // likes="10"
+                            // comments="5"
                             backgroundImg={
                               item.imgfilename === null
                                 ? "https://via.placeholder.com/343x229"
@@ -182,6 +182,12 @@ class Home extends React.Component {
                           />
                       </Col>
                     )}
+                    <Col sm="6" lg="4" className="d-flex justify-content-center">
+                      <Button className="add-news__btn shadow border-0" color="muted">
+                        <span>Добавить новость</span> <br/>
+                        <span><i className="fas fa-plus"/></span>
+                      </Button>
+                    </Col>
                   </Row>
                   <Row className="justify-content-center my-3">
                     <Col lg="9" className="d-flex justify-content-center">

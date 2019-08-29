@@ -1,5 +1,5 @@
 import React from "react";
-import {withAuth} from "@okta/okta-react";
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -17,25 +17,17 @@ import {
 // Images uploader UI component
 import ImageUploader from "react-images-upload";
 
-export default withAuth(class NewsAdminModal extends React.Component {
+export default class NewsAdminModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
       modal: false,
       newsTitle: '',
       newsText: '',
-      pictures: []
+      newsDate: '',
+      file: null,
+      newsImg: null
     };
-  }
-
-  async getCurrentUser() {
-    this.props.auth.getUser()
-      .then(user => this.setState({user}));
-  };
-
-  componentDidMount() {
-    this.getCurrentUser();
   }
 
   toggle = () => {
@@ -52,15 +44,46 @@ export default withAuth(class NewsAdminModal extends React.Component {
     this.setState({newsText: e.target.value});
   };
 
+  handleChangeNewsDate = (e) => {
+    console.log(e.target.value);
+    this.setState({newsDate: e.target.value});
+  };
+
+  handleChangeNewsImg = (e) => {
+    console.log(e.target);
+    this.setState({
+      newsImg: e.target.files[0].name,
+      file: URL.createObjectURL(e.target.files[0])
+    });
+  };
+
+  handleClickCreateNews = async (e) => {
+    e.preventDefault();
+    await axios({
+      method: 'post',
+      url: 'https://fantasy-bfl.herokuapp.com/news/create',
+      data: {
+        news_date: this.state.newsDate,
+        title: this.state.newsTitle,
+        text: this.state.newsText,
+        imgFileName: this.state.newsImg,
+      }
+    }).then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+
+  };
+
   onDrop = picture => {
     this.setState({
-      pictures: this.state.pictures.concat(picture)
-    })
+      newsImg: this.state.newsImg.concat(picture)
+    });
+    console.log(this.state.newsImg)
   };
 
   render() {
-    if (!this.state.user) return null;
-    console.log(this.state.pictures);
+    console.log(this.state.newsImg);
     const {buttonLabel, className, title, text} = this.props;
     return <>
       <Button color="danger" onClick={this.toggle}>{buttonLabel}</Button>
@@ -89,8 +112,25 @@ export default withAuth(class NewsAdminModal extends React.Component {
               />
             </FormGroup>
             <FormGroup>
+              <Label for="news-date">Дата публикации</Label>
+              <Input
+                type="date"
+                name="news-date"
+                id="news-date"
+                placeholder="date placeholder"
+                value={this.state.newsDate}
+                onChange={this.handleChangeNewsDate}
+              />
+            </FormGroup>
+            <FormGroup>
               <Label for="news-img">Загрузить изображение</Label>
-              <Input type="file" id="news-img" name="news-img" />
+              <Input
+                type="file"
+                id="news-img"
+                name="news-img"
+                onChange={this.handleChangeNewsImg}
+              />
+              <img src={this.state.file} width="189" alt=""/>
             </FormGroup>
             {/*<ImageUploader*/}
             {/*  withPreview={true}*/}
@@ -104,10 +144,9 @@ export default withAuth(class NewsAdminModal extends React.Component {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.toggle}>Отменить</Button>
-          <Button color="secondary" onClick={this.toggle}>Опубликовать</Button>
+          <Button color="secondary" onClick={this.handleClickCreateNews}>Опубликовать</Button>
         </ModalFooter>
       </Modal>
     </>
   }
-
-})
+}

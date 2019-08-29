@@ -17,7 +17,7 @@ class News extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      news: {}
+      news: []
     };
   }
 
@@ -37,8 +37,14 @@ class News extends React.Component {
       });
   }
 
+  publicDate = newsDate => {
+    return new Date(newsDate);
+  };
+
   render() {
+    const { news } = this.state;
     // const {title, text} = this.props.location;
+    console.log(news);
     return (
       <>
         <Header/>
@@ -76,27 +82,25 @@ class News extends React.Component {
               <Card className="card-profile shadow mt--300 pb-5">
                 <div className="px-4">
                   <Row className="justify-content-center">
-                    <Col>
-                      <div>
-                        <h3 className="text-center">Title</h3>
-                      </div>
-                      <div className="d-flex justify-content-center mb-3">
-                        <img src="https://via.placeholder.com/800x400" alt=""/>
-                      </div>
-                      <div>
+                    {news.map(item =>
+                    <Col key={item.id}>
+                        <div>
+                          <h4 className="text-center">{item.title}</h4>
+                        </div>
+                        <div className="d-flex justify-content-center mb-3">
+                        <img src={item.imgfilename === null
+                            ? "https://via.placeholder.com/800x400"
+                            : require("assets/img/news/" + item.imgfilename + ".jpg")}
+                             alt=""/>
+                        </div>
+                        <div>
                         <p className="text-center">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
-                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
-                          sed sint veniam vero, voluptate voluptatibus?
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
-                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
-                          sed sint veniam vero, voluptate voluptatibus?
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque, cupiditate debitis
-                          doloremque dolores ea eaque error, fugiat in ipsa laboriosam laudantium repellat reprehenderit
-                          sed sint veniam vero, voluptate voluptatibus?
+                        {item.text}
                         </p>
-                      </div>
+                        </div>
+                      <div className="float-right"><p>{this.publicDate(item.news_date).toLocaleDateString()}</p></div>
                     </Col>
+                    )}
                   </Row>
                 </div>
               </Card>
