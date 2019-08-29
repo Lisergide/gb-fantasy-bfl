@@ -78,11 +78,11 @@ class Home extends React.Component {
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
                         <a href="#pablo" onClick={e => e.preventDefault()}>
-                          {/*<img*/}
-                          {/*  alt="..."*/}
-                          {/*  // className="rounded-circle"*/}
-                          {/*  src={require("assets/img/brand/bflmafia_logo.png")}*/}
-                          {/*/>*/}
+                          <img
+                            alt="..."
+                            // className="rounded-circle"
+                            src={require("assets/img/brand/bflmafia_logo.png")}
+                          />
                         </a>
                       </div>
                     </Col>
@@ -157,9 +157,9 @@ class Home extends React.Component {
                           популяризация футбола в городе Брянске и Брянской
                           области.
                         </p>
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                          Читать далее...
-                        </a>
+                        {/*<a href="#pablo" onClick={e => e.preventDefault()}>*/}
+                        {/*  Читать далее...*/}
+                        {/*</a>*/}
                       </Col>
                     </Row>
                   </div>

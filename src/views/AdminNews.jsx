@@ -8,7 +8,13 @@ import {
   Container,
   Row,
   Col,
-  Media
+  Media,
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+  UncontrolledCollapse,
+  Button,
 } from "reactstrap";
 
 // core components
@@ -76,21 +82,37 @@ class AdminNews extends React.Component {
             <Container>
               <Card className="card-profile shadow mt--300 pb-5">
                 <div className="px-4">
+                  <h4>Новости</h4>
                   <Row className="justify-content-center">
-                    <Col>
+                    <Col lg="10">
                       {news.map(item =>
-                        <Media key={item.id} className="border rounded p-2 my-3">
-                          <Media left href="#">
-                            <Media object src="https://via.placeholder.com/64x64" alt="News image" />
-                          </Media>
-                          <Media body>
-                            <Media heading tag="h6">
-                              <Link to={`/news/${item.id}`}>
-                                {item.title}
-                              </Link>
-                            </Media>
-                          </Media>
-                        </Media>
+                        <ListGroup key={item.id}>
+                          <ListGroupItem >
+                            <ListGroupItemHeading id={'news-list' + item.id} tag="h6">
+                              {item.title}
+                              <a href="#pablo" className="float-right pl-2"><i className="fas fa-edit"/></a>
+                              <a href="#pablo" className="float-right pl-2"><i className="fas fa-trash-alt"/></a>
+                            </ListGroupItemHeading>
+
+                          <UncontrolledCollapse toggler={'#news-list' + item.id}>
+                            <ListGroupItemText>{item.text}</ListGroupItemText>
+                          </UncontrolledCollapse>
+                          </ListGroupItem>
+                          {/*<Button><i className="fas fa-trash-alt"/></Button>*/}
+                          {/*<Button><i className="fas fa-edit"/></Button>*/}
+                        </ListGroup>
+                        // <Media key={item.id} className="border rounded p-2 my-3">
+                        //   <Media left href="#">
+                        //     <Media object src="https://via.placeholder.com/64x64" alt="News image" />
+                        //   </Media>
+                        //   <Media body>
+                        //     <Media heading tag="h6">
+                        //       <Link to={`/news/${item.id}`}>
+                        //         {item.title}
+                        //       </Link>
+                        //     </Media>
+                        //   </Media>
+                        // </Media>
                       )}
                     </Col>
                   </Row>
