@@ -1,4 +1,5 @@
 import React from "react";
+import {withAuth} from "@okta/okta-react";
 import axios from "axios";
 
 // reactstrap components
@@ -7,24 +8,34 @@ import {
   Card,
   Container,
   Row,
-  Col, CardImg, CardImgOverlay, CardTitle, CardFooter, CardLink,
+  Col,
 } from "reactstrap";
 
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import NewsBox from "components/NewsBox/NewsBox";
-import {Link} from "react-router-dom";
+import CreateNewsModal from "components/CreateNewsModal/CreateNewsModal";
+// import {Link} from "react-router-dom";
 
-class Home extends React.Component {
+export default withAuth(class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
       news: [],
     };
   }
 
+  getCurrentUser = async () => {
+    // console.log(this.props.auth.getUser());
+    this.props.auth.getUser()
+      .then(user => this.setState({user}));
+  };
+
   componentDidMount() {
+    this.getCurrentUser();
+
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
@@ -77,13 +88,13 @@ class Home extends React.Component {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        {/*<a href="#pablo" onClick={e => e.preventDefault()}>*/}
-                        {/*  <img*/}
-                        {/*    alt="..."*/}
-                        {/*    // className="rounded-circle"*/}
-                        {/*    src={require("assets/img/brand/bflmafia_logo.png")}*/}
-                        {/*  />*/}
-                        {/*</a>*/}
+                        <a href="#pablo" onClick={e => e.preventDefault()}>
+                          <img
+                            alt="..."
+                            // className="rounded-circle"
+                            src={require("assets/img/brand/bflmafia_logo.png")}
+                          />
+                        </a>
                       </div>
                     </Col>
                     <Col className="order-lg-3 text-lg-right align-self-lg-center"
@@ -124,8 +135,8 @@ class Home extends React.Component {
                   </Row>
                   <div className="text-center mt-5">
                     <h3>
-                      {/*Брянская Футбольгая Лига{" "}*/}
-                      {/* <span className="font-weight-light">, 27</span> */}
+                      Брянская Футбольгая Лига{" "}
+                       {/*<span className="font-weight-light">, 27</span> */}
                     </h3>
                     {/* <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2" />
@@ -171,31 +182,42 @@ class Home extends React.Component {
                       <Col key={item.id} sm="6" lg="4" className="d-flex justify-content-center">
                           <NewsBox
                             link={`/news-page/${item.id}`}
-                            title={item.title}
+                            newsTitle={item.title}
                             newsDate={item.news_date}
+                            newsId={item.id}
+                            newsText={item.text}
                             // likes="10"
                             // comments="5"
                             backgroundImg={
                               item.imgfilename === null
                                 ? "https://via.placeholder.com/343x229"
-                                : require("assets/img/news/" + item.imgfilename + ".jpg")}
+                                :  item.imgfilename}
                           />
                       </Col>
                     )}
-                    <Col sm="6" lg="4" className="d-flex justify-content-center">
-                      <Button className="add-news__btn shadow border-0" color="muted">
-                        <span>Добавить новость</span> <br/>
-                        <span><i className="fas fa-plus"/></span>
-                      </Button>
-                    </Col>
+                    {!this.state.user ? null :
+                      <Col sm="6" lg="4" className="d-flex justify-content-center">
+                        <CreateNewsModal
+                          btnClassName="btn-add-news shadow border-0"
+                          btnColor="muted"
+                          btnLabel="Добавить новость"
+                          modalTitle="Добавление новости"
+                          btnIcon={<i className="fas fa-plus"/>}
+                        />
+                        {/*<Button className="btn-add-news shadow border-0" color="muted">*/}
+                        {/*  <span className="btn-add-news__plus"><i className="fas fa-plus"/></span> <br/>*/}
+                        {/*  <span className="btn-add-news__title">Добавить новость</span>*/}
+                        {/*</Button>*/}
+                      </Col>
+                    }
                   </Row>
-                  <Row className="justify-content-center my-3">
-                    <Col lg="9" className="d-flex justify-content-center">
-                      <Button outline color="primary">
-                        Смотреть все
-                      </Button>
-                    </Col>
-                  </Row>
+                  {/*<Row className="justify-content-center my-3">*/}
+                  {/*  <Col lg="9" className="d-flex justify-content-center">*/}
+                  {/*    <Button outline color="primary">*/}
+                  {/*      Смотреть все*/}
+                  {/*    </Button>*/}
+                  {/*  </Col>*/}
+                  {/*</Row>*/}
                 </div>
               </Card>
             </Container>
@@ -205,6 +227,4 @@ class Home extends React.Component {
       </>
     );
   }
-}
-
-export default Home;
+})

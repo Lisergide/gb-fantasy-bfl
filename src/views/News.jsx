@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 // reactstrap components
@@ -7,6 +8,7 @@ import {
   Container,
   Row,
   Col,
+  Button,
 } from "reactstrap";
 
 // core components
@@ -44,7 +46,7 @@ class News extends React.Component {
   render() {
     const { news } = this.state;
     // const {title, text} = this.props.location;
-    console.log(news);
+    // console.log(news);
     return (
       <>
         <Header/>
@@ -90,7 +92,7 @@ class News extends React.Component {
                         <div className="d-flex justify-content-center mb-3">
                         <img src={item.imgfilename === null
                             ? "https://via.placeholder.com/800x400"
-                            : require("assets/img/news/" + item.imgfilename + ".jpg")}
+                            :  item.imgfilename}
                              alt=""/>
                         </div>
                         <div>
@@ -98,6 +100,7 @@ class News extends React.Component {
                         {item.text}
                         </p>
                         </div>
+                      <Button tag={Link} to="/" outline color="primary">Вернуться назад</Button>
                       <div className="float-right"><p>{this.publicDate(item.news_date).toLocaleDateString()}</p></div>
                     </Col>
                     )}

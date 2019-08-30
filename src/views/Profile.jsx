@@ -2,7 +2,13 @@ import React from "react";
 import {withAuth} from '@okta/okta-react';
 
 // reactstrap components
-import {Button, Card, Container, Row, Col} from "reactstrap";
+import {
+  // Button,
+  Card,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
 
 // core components
 import Header from "components/Header/Header.jsx";
@@ -75,35 +81,35 @@ export default withAuth(class Profile extends React.Component {
                     <Col className="order-lg-3 text-lg-right align-self-lg-center"
                       lg="4">
                       <div className="card-profile-actions py-4 mt-lg-0">
-                        <Button className="mr-4"
-                          color="info"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          size="sm">
-                          Connect
-                        </Button>
-                        <Button className="float-right"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          size="sm">
-                          Message
-                        </Button>
+                        {/*<Button className="mr-4"*/}
+                        {/*  color="info"*/}
+                        {/*  href="#pablo"*/}
+                        {/*  onClick={e => e.preventDefault()}*/}
+                        {/*  size="sm">*/}
+                        {/*  Connect*/}
+                        {/*</Button>*/}
+                        {/*<Button className="float-right"*/}
+                        {/*  color="default"*/}
+                        {/*  href="#pablo"*/}
+                        {/*  onClick={e => e.preventDefault()}*/}
+                        {/*  size="sm">*/}
+                        {/*  Message*/}
+                        {/*</Button>*/}
                       </div>
                     </Col>
                     <Col className="order-lg-1" lg="4">
                       <div className="card-profile-stats d-flex justify-content-center">
                         <div>
-                          <span className="heading">22</span>
-                          <span className="description">Friends</span>
+                          <span className="heading">{" "}</span>
+                          <span className="description">{" "}</span>
                         </div>
                         <div>
-                          <span className="heading">10</span>
-                          <span className="description">Photos</span>
+                          <span className="heading">{" "}</span>
+                          <span className="description">{" "}</span>
                         </div>
                         <div>
-                          <span className="heading">89</span>
-                          <span className="description">Comments</span>
+                          <span className="heading">{" "}</span>
+                          <span className="description">{" "}</span>
                         </div>
                       </div>
                     </Col>
@@ -111,11 +117,11 @@ export default withAuth(class Profile extends React.Component {
                   <div className="text-center mt-5">
                     <h3>
                       {this.state.user.name}{" "}
-                      <span className="font-weight-light">, 29</span>
+                      <span className="font-weight-light">{" "}</span>
                     </h3>
                     <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2"/>
-                      Moscow, Russia
+                      {" "}
                     </div>
                   </div>
                 </div>
