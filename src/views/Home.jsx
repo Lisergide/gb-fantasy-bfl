@@ -25,10 +25,10 @@ export default withAuth(class Home extends React.Component {
       user: null,
       news: [],
     };
+    this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
-  getCurrentUser = async () => {
-    // console.log(this.props.auth.getUser());
+  async getCurrentUser(){
     this.props.auth.getUser()
       .then(user => this.setState({user}));
   };

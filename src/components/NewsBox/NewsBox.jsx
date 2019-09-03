@@ -20,10 +20,12 @@ import EditNewsModal from "../EditNewsModal/EditNewsModal";
 export default withAuth(class NewsBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {user: null}
+    this.state = {user: null};
+    this.getCurrentUser = this.getCurrentUser.bind(this);
+    this.handleClickDeleteNews = this.handleClickDeleteNews.bind(this);
   }
 
-  getCurrentUser = async () => {
+  async getCurrentUser() {
     this.props.auth.getUser()
       .then(user => this.setState({user}));
   };
@@ -32,7 +34,7 @@ export default withAuth(class NewsBox extends React.Component {
     this.getCurrentUser();
   }
 
-  handleClickDeleteNews = async (e) => {
+  async handleClickDeleteNews(e) {
     e.preventDefault();
     // console.log(e.target.id);
     await axios({
