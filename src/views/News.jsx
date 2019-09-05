@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from "axios";
 
 // reactstrap components
@@ -28,13 +28,13 @@ class News extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
 
-    const { match } = this.props;
+    const {match} = this.props;
     axios.get(`https://fantasy-bfl.herokuapp.com/news/${match.params.id}`)
       .then(res => {
         const data = res.data.results;
-        this.setState({ news: data });
+        this.setState({news: data});
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -44,7 +44,7 @@ class News extends React.Component {
   };
 
   render() {
-    const { news } = this.state;
+    const {news} = this.state;
     // const {title, text} = this.props.location;
     // console.log(news);
     return (
@@ -85,24 +85,25 @@ class News extends React.Component {
                 <div className="px-4">
                   <Row className="justify-content-center">
                     {news.map(item =>
-                    <Col key={item.id}>
+                      <Col key={item.id}>
                         <div>
                           <h4 className="text-center">{item.title}</h4>
                         </div>
                         <div className="d-flex justify-content-center mb-3">
-                        <img src={item.imgfilename === null
+                          <img className="single_news__img" src={item.imgfilename === null
                             ? "https://via.placeholder.com/800x400"
-                            :  item.imgfilename}
-                             alt=""/>
+                            : item.imgfilename}
+                               alt=""
+                               />
                         </div>
                         <div>
-                        <p className="text-center">
-                        {item.text}
-                        </p>
+                          <p className="text-center">
+                            {item.text}
+                          </p>
                         </div>
-                      <Button tag={Link} to="/" outline color="primary">Вернуться назад</Button>
-                      <div className="float-right"><p>{this.publicDate(item.news_date).toLocaleDateString()}</p></div>
-                    </Col>
+                        <Button tag={Link} to="/" outline color="primary">Вернуться назад</Button>
+                        <div className="float-right"><p>{this.publicDate(item.news_date).toLocaleDateString()}</p></div>
+                      </Col>
                     )}
                   </Row>
                 </div>

@@ -18,23 +18,28 @@ import {
 import EditNewsModal from "../EditNewsModal/EditNewsModal";
 
 export default withAuth(class NewsBox extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {user: null};
+    this._isMounted = false;
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.handleClickDeleteNews = this.handleClickDeleteNews.bind(this);
+    // this.handleClickDeleteNews = this.handleClickDeleteNews.bind(this);
   }
 
   async getCurrentUser() {
     this.props.auth.getUser()
-      .then(user => this.setState({user}));
+      .then(user => { if(this._isMounted) {
+        this.setState({user})
+      }});
   };
 
   componentDidMount() {
+    this._isMounted = true;
     this.getCurrentUser();
   }
 
-  async handleClickDeleteNews(e) {
+  handleClickDeleteNews = async (e) => {
     e.preventDefault();
     // console.log(e.target.id);
     await axios({
@@ -52,6 +57,10 @@ export default withAuth(class NewsBox extends React.Component {
       console.log(res.status);
     })
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     const {

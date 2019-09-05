@@ -1,5 +1,7 @@
 import React from "react";
 
+import LeagueTable from "../components/LeagueTable/LeagueTable";
+
 // reactstrap components
 import {
   Card,
@@ -47,6 +49,7 @@ class Fantasy extends React.Component {
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
                       <h2>Здесь будет Fantasy!</h2>
+                      <LeagueTable/>
                     </CardBody>
                   </Card>
                 </Col>

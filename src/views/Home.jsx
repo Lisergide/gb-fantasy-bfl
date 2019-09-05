@@ -19,16 +19,17 @@ import CreateNewsModal from "components/CreateNewsModal/CreateNewsModal";
 // import {Link} from "react-router-dom";
 
 export default withAuth(class Home extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       user: null,
       news: [],
     };
-    this.getCurrentUser = this.getCurrentUser.bind(this);
+    // this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
-  async getCurrentUser(){
+  getCurrentUser = async () => {
     this.props.auth.getUser()
       .then(user => this.setState({user}));
   };

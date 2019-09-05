@@ -32,7 +32,7 @@ export default class EditNewsModal extends React.Component {
       newsImgName: null,
       newsImgUrl: null
     };
-    this.handleClickEditNews = this.handleClickEditNews.bind(this);
+    // this.handleClickEditNews = this.handleClickEditNews.bind(this);
   }
 
   toggle = () => {
@@ -86,7 +86,7 @@ export default class EditNewsModal extends React.Component {
       });
   };
 
-  async handleClickEditNews() {
+  handleClickEditNews = async () => {
     // e.preventDefault();
     await axios({
       method: 'put',

@@ -30,7 +30,7 @@ export default class CreateNewsModal extends React.Component {
       newsImgName: null,
       newsImgUrl: null
     };
-    this.handleClickCreateNews = this.handleClickCreateNews.bind(this);
+    // this.handleClickCreateNews = this.handleClickCreateNews.bind(this);
   }
 
   toggle = () => {
@@ -87,7 +87,7 @@ export default class CreateNewsModal extends React.Component {
       });
   };
 
-  async handleClickCreateNews() {
+  handleClickCreateNews = async () => {
     // e.preventDefault();
     await axios({
       method: 'post',

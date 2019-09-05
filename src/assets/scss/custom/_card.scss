@@ -97,6 +97,7 @@
 
 // Custom news box user element
 .news_box {
+  height: 285.7px;
   &__link {
     width: 100%;
     height: 100%;
@@ -119,6 +120,8 @@
   }
 
   &__img {
+    //width: 343px;
+    //height: 220px;
     display: block;
     position: relative;
     transition: all .4s linear;
@@ -130,4 +133,9 @@
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
   }
+}
+
+.single_news__img {
+  width: 100%;
+  height: auto;
 }
