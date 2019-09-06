@@ -1,16 +1,17 @@
 import React from "react";
+import LeagueTableModal from "./LeagueTableModal";
 
 const LeagueTableRow = (props) => {
   return (
     <tr>
       <td className="team-position">
-        {props.position}
+        {props.position + 1}
       </td>
       <td className="team-name">
-        <div className="crest">
-          <img src={props.crestURI} alt=""/>
-        </div>
-        <span>{props.team}</span>
+        {/*<div className="crest">*/}
+        {/*  <img src={props.crestURI} alt=""/>*/}
+        {/*</div>*/}
+        <span><LeagueTableModal team_id={props.team_id} team={props.team}/></span>
       </td>
       <td>
         {props.gamesPlayed}

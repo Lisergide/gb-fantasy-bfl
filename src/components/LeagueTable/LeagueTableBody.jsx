@@ -10,28 +10,28 @@ const LeagueTableBody = (props) => {
           #
         </td>
         <td className="team-name">
-          Team
+          Клуб
         </td>
-        <td title="Matches played">
-          MP
+        <td title="Игры">
+          И
         </td>
-        <td title="Wins">
-          W
+        <td title="Победы">
+          В
         </td>
-        <td title="Draws">
-          D
+        <td title="Ничьи">
+          Н
         </td>
-        <td title="Losses">
-          L
+        <td title="Поражения">
+          П
         </td>
-        <td title="Goals scored">
-          GS
+        <td title="Забито мячей">
+          ЗМ
         </td>
-        <td title="Goals missed">
-          GM
+        <td title="Пропущено мячей">
+          ПМ
         </td>
-        <td title="Team points">
-          Pts
+        <td title="Очки">
+          О
         </td>
       </tr>
       {props.children}

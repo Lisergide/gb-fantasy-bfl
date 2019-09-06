@@ -8,14 +8,16 @@ import {
   CardBody,
   Container,
   Row,
-  Col
+  Col,
+  UncontrolledTooltip
 } from "reactstrap";
 
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
+import CreateNewTeamModal from "../components/CreateNewTeamModal/CreateNewTeamModal";
 
-class Fantasy extends React.Component {
+class TableView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +50,11 @@ class Fantasy extends React.Component {
                 <Col lg="9">
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
-                      <h2>Здесь будет Fantasy!</h2>
+                      <div className="d-flex justify-content-between">
+                        <h2>Турнирная таблица</h2>
+                        <CreateNewTeamModal  btnTitle={<i className="fas fa-plus"></i>} />
+                        <UncontrolledTooltip placement="top" target="addTeam">Добавить команду</UncontrolledTooltip>
+                      </div>
                       <LeagueTable/>
                     </CardBody>
                   </Card>
@@ -63,4 +69,4 @@ class Fantasy extends React.Component {
   }
 }
 
-export default Fantasy;
+export default TableView;

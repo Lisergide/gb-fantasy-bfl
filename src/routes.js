@@ -3,7 +3,7 @@ import Home from "views/Home";
 import Landing from "views/Landing";
 import Login from "views/Login";
 import Register from "views/Register";
-import Fantasy from "views/Fantasy";
+import TableView from "views/TableView";
 import News from "views/News";
 
 export default [
@@ -28,9 +28,9 @@ export default [
     component: Register,
   },
   {
-    path: '/fantasy-page',
+    path: '/table-page',
     exact: true,
-    component: Fantasy,
+    component: TableView,
   },
   {
     path: '/news-page/:id',
