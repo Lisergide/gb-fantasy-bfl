@@ -5,6 +5,7 @@ import Login from "views/Login";
 import Register from "views/Register";
 import TableView from "views/TableView";
 import News from "views/News";
+import ControlCenter from "views/ControlCenter";
 
 export default [
   {
@@ -36,5 +37,11 @@ export default [
     path: '/news-page/:id',
     exact: true,
     component: News,
+  },
+  {
+    path: '/control-page',
+    exact: true,
+    component: ControlCenter,
   }
+
 ]

@@ -23,7 +23,7 @@ class LeagueTable extends Component {
 
             return (
               rows.push(
-                <LeagueTableRow key={index} team_id={team_id} position={index} team={team} gamesPlayed={games_played} wins={wins} draws={draws} looses={looses} goalesScored={goales_scored} goalesMissed={goales_missed} points={points} />
+                <LeagueTableRow key={index} team_id={team_id} position={index} team={team} games_played={games_played} wins={wins} draws={draws} looses={looses} goales_scored={goales_scored} goales_missed={goales_missed} points={points} />
               )
             )
           }

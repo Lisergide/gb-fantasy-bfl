@@ -5,20 +5,35 @@ import axios from "axios";
 // reactstrap components
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Input} from "reactstrap";
 
+// ant-design components
+import {InputNumber} from "antd";
+// import 'antd/dist/antd.css';
+
 class LeagueTableModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
       team_id: 0,
-      games_played: 0,
-      wins: 0,
-      draws: 0,
-      looses: 0,
-      goales_scored: 0,
-      goales_missed: 0,
-      points: 0,
+      games_played: this.props.games_played,
+      wins: this.props.wins,
+      draws: this.props.draws,
+      looses: this.props.looses,
+      goales_scored: this.props.goales_scored,
+      goales_missed: this.props.goales_missed,
+      points: this.props.points,
+      resultsTeams: []
     };
+  }
+
+  async componentDidMount() {
+    await axios.get('https://fantasy-bfl.herokuapp.com/league-table')
+      .then(res => {
+        const resultsTeams = res.data.league_table;
+        this.setState({resultsTeams})
+      }).catch(function (error) {
+        console.log(error);
+      });
   }
 
   toggle = () => {
@@ -27,32 +42,33 @@ class LeagueTableModal extends React.Component {
     });
   };
 
-  handleChangeGamesPlayed = (e) => {
-    this.setState({games_played: e.target.value});
+  handleChangeGamesPlayed = (value) => {
+    console.log(value);
+    this.setState({games_played: value});
   };
 
-  handleChangeWins = (e) => {
-    this.setState({wins: e.target.value});
+  handleChangeWins = (value) => {
+    this.setState({wins: value});
   };
 
-  handleChangeDraws = (e) => {
-    this.setState({draws: e.target.value});
+  handleChangeDraws = (value) => {
+    this.setState({draws: value});
   };
 
-  handleChangeLooses = (e) => {
-    this.setState({looses: e.target.value});
+  handleChangeLooses = (value) => {
+    this.setState({looses: value});
   };
 
-  handleChangeGoalesScored = (e) => {
-    this.setState({goales_scored: e.target.value});
+  handleChangeGoalesScored = (value) => {
+    this.setState({goales_scored: value});
   };
 
-  handleChangeGoalesMissed = (e) => {
-    this.setState({goales_missed: e.target.value});
+  handleChangeGoalesMissed = (value) => {
+    this.setState({goales_missed: value});
   };
 
-  handleChangePoints = (e) => {
-    this.setState({points: e.target.value});
+  handleChangePoints = (value) => {
+    this.setState({points: value});
   };
 
   handleClickEditTeam = async () => {
@@ -122,25 +138,32 @@ class LeagueTableModal extends React.Component {
               </tr>
               <tr>
                 <td>
-                    <Input type="text" name="games_played" value={this.state.games_played} onChange={this.handleChangeGamesPlayed} />
+                  <InputNumber type="number" name="games_played" min={0} value={this.state.games_played}
+                               onChange={this.handleChangeGamesPlayed}/>
                 </td>
                 <td>
-                    <Input type="text" name="wins" value={this.state.wins} onChange={this.handleChangeWins}/>
+                  <InputNumber type="number" name="wins" min={0} value={this.state.wins}
+                               onChange={this.handleChangeWins}/>
                 </td>
                 <td>
-                  <Input type="text" name="draws" value={this.state.draws} onChange={this.handleChangeDraws}/>
+                  <InputNumber type="number" name="draws" min={0} value={this.state.draws}
+                               onChange={this.handleChangeDraws}/>
                 </td>
                 <td>
-                  <Input type="text" name="looses" value={this.state.looses} onChange={this.handleChangeLooses}/>
+                  <InputNumber type="number" name="looses" min={0} value={this.state.looses}
+                               onChange={this.handleChangeLooses}/>
                 </td>
                 <td>
-                  <Input type="text" name="goales_scored" value={this.state.goales_scored} onChange={this.handleChangeGoalesScored}/>
+                  <InputNumber type="number" name="goales_scored" min={0} value={this.state.goales_scored}
+                         onChange={this.handleChangeGoalesScored}/>
                 </td>
                 <td>
-                  <Input type="text" name="goales_missed" value={this.state.goales_missed} onChange={this.handleChangeGoalesMissed}/>
+                  <InputNumber type="number" name="goales_missed" min={0} value={this.state.goales_missed}
+                         onChange={this.handleChangeGoalesMissed}/>
                 </td>
                 <td>
-                  <Input type="text" name="points" value={this.state.points} onChange={this.handleChangePoints}/>
+                  <InputNumber type="number" name="points" value={this.state.points}
+                               onChange={this.handleChangePoints}/>
                 </td>
               </tr>
               </tbody>

@@ -156,10 +156,10 @@ export default withAuth(class Header extends React.Component {
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="/table-page">
-                        <i className="fas fa-table d-lg-none mr-1"/>
+                      <NavLink href="/control-page">
+                        <i className="fas fa-sliders-h d-lg-none mr-1"/>
                         <span className="nav-link-inner--text">
-                        Турнирная таблица
+                        Центр управления
                       </span>
                       </NavLink>
                     </NavItem>

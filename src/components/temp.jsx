@@ -14,8 +14,6 @@ import {
   InputGroupAddon,
   Label,
   Input,
-  FormGroup,
-  CustomInput,
 } from "reactstrap";
 
 class CreateNewTeamModal extends React.Component {
@@ -33,7 +31,6 @@ class CreateNewTeamModal extends React.Component {
       goales_missed: 0,
       points: 0,
       teams: [],
-      resultsTeams: []
     };
   }
 
@@ -43,23 +40,13 @@ class CreateNewTeamModal extends React.Component {
         const teams = res.data.teams;
         this.setState({teams})
       }).catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  getResults() {
-    axios.get('https://fantasy-bfl.herokuapp.com/league-table')
-      .then(res => {
-        const resultsTeams = res.data.league_table;
-        this.setState({resultsTeams})
-      }).catch(function (error) {
       console.log(error);
     });
   }
 
   componentDidMount() {
     this.getTeams();
-    this.getResults();
+
   }
 
   toggle = () => {
@@ -69,24 +56,51 @@ class CreateNewTeamModal extends React.Component {
   };
 
   handleChangeTeam = (e) => {
-    const team = e.target.value;
-    const index = e.target.options.selectedIndex;
-    const optionElement = e.target.childNodes[index];
-    const team_id = optionElement.getAttribute('id');
+    this.setState({team: e.target.value});
 
-    const resultsTeamSelect = this.state.resultsTeams.filter(f => f.team_id === +team_id);
-    resultsTeamSelect.map(result =>
-      this.setState({
-        team: team,
-        team_id: team_id,
-        games_played: result.games_played,
-        wins: result.wins,
-        draws: result.draws,
-        looses: result.looses,
-        goales_scored: result.goales_scored,
-        goales_missed: result.goales_missed,
-        points: result.points
-      }))
+    // const team = e.target.value;
+    // const index = e.target.options.selectedIndex;
+    // const optionElement = e.target.childNodes[index];
+    // const team_id = optionElement.getAttribute('id');
+
+    // const resultsTeamSelect = this.state.resultsTeams.filter(f => f.team_id === +team_id);
+    // resultsTeamSelect.map(result =>
+    //   this.setState({
+    //     team: team,
+    //     team_id: team_id,
+    //     games_played: result.games_played,
+    //     wins: result.wins,
+    //     draws: result.draws,
+    //     looses: result.looses,
+    //     goales_scored: result.goales_scored,
+    //     goales_missed: result.goales_missed,
+    //     points: result.points
+    //   }))
+  };
+
+  handleClickCreateTeam = () => {
+    axios({
+      method: 'post',
+      url: `https://fantasy-bfl.herokuapp.com/teams/create`,
+      data: {
+        team: this.state.team,
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        // this.setState({
+        //   modal: false,
+        // });
+        // window.location.reload(true);
+        try {
+          this.getTeams();
+        } catch (err) {
+          console.log(err);
+        }
+
+      }
+      console.log(res);
+      console.log(res.status);
+    });
   };
 
   handleChangeGamesPlayed = (e) => {
@@ -117,30 +131,30 @@ class CreateNewTeamModal extends React.Component {
     this.setState({points: e.target.value});
   };
 
-  handleClickAddToLeagueTable = () => {
-    axios({
-      method: 'post',
-      url: `https://fantasy-bfl.herokuapp.com/league-table/create`,
-      data: {
-        team_id: this.state.team_id,
-        games_played: this.state.games_played,
-        wins: this.state.wins,
-        draws: this.state.draws,
-        looses: this.state.looses,
-        goales_scored: this.state.goales_scored,
-        goales_missed: this.state.goales_missed,
-        points: this.state.points,
-      }
-    }).then(res => {
-      if (res.status === 200) {
-        this.setState({
-          modal: false,
-        });
-        window.location.reload(true);
-      }
-      console.log(res);
-      console.log(res.status);
-    });
+
+
+  handleClickAddTeam = () => {
+    const team = this.state.team;
+    const teams = this.state.teams;
+
+    const teamId = teams.filter(f => f.team === team);
+    teamId.map(result =>
+      this.setState({
+        team_id: result.id
+      }));
+    console.log(this.state.team_id);
+    // resultsTeamSelect.map(result =>
+    //   this.setState({
+    //     team: team,
+    //     team_id: team_id,
+    //     games_played: result.games_played,
+    //     wins: result.wins,
+    //     draws: result.draws,
+    //     looses: result.looses,
+    //     goales_scored: result.goales_scored,
+    //     goales_missed: result.goales_missed,
+    //     points: result.points
+    //   }))
   };
 
   render() {
@@ -156,15 +170,13 @@ class CreateNewTeamModal extends React.Component {
                className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Добавить команду</ModalHeader>
           <ModalBody>
-            <FormGroup>
-              <Label for="team">Название команды</Label>
-              <CustomInput type="select" name="team" id="team" value={this.state.team} onChange={this.handleChangeTeam}>
-                <option value="">Выберите команду</option>
-                {teams.map(team =>
-                  <option key={team.id} id={team.id} value={team.team}>{team.team}</option>
-                )}
-              </CustomInput>
-            </FormGroup>
+            <Label for="team">Название команды</Label>
+            <InputGroup>
+              <Input type="text" name="team" id="team" value={this.state.team} onChange={this.handleChangeTeam}/>
+              <InputGroupAddon addonType="append">
+                <Button color="success" onClick={this.handleClickCreateTeam}>Создать</Button>
+              </InputGroupAddon>
+            </InputGroup>
             <Table className="modal_table mt-3">
               <tbody className="text-center">
               <tr className="table-head">
@@ -207,7 +219,7 @@ class CreateNewTeamModal extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Отменить</Button>{' '}
-            <Button color="primary" onClick={this.handleClickAddToLeagueTable}>Добавить</Button>
+            <Button color="primary" onClick={this.handleClickAddTeam}>Сохранить</Button>
           </ModalFooter>
         </Modal>
       </div>

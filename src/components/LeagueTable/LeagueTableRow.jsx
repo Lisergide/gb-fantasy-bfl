@@ -11,10 +11,22 @@ const LeagueTableRow = (props) => {
         {/*<div className="crest">*/}
         {/*  <img src={props.crestURI} alt=""/>*/}
         {/*</div>*/}
-        <span><LeagueTableModal team_id={props.team_id} team={props.team}/></span>
+        <span>
+            <LeagueTableModal
+              team_id={props.team_id}
+              team={props.team}
+              games_played={props.games_played}
+              wins={props.wins}
+              draws={props.draws}
+              looses={props.looses}
+              goales_scored={props.goales_scored}
+              goales_missed={props.goales_missed}
+              points={props.points}
+            />
+        </span>
       </td>
       <td>
-        {props.gamesPlayed}
+        {props.games_played}
       </td>
       <td>
         {props.wins}
@@ -26,10 +38,10 @@ const LeagueTableRow = (props) => {
         {props.looses}
       </td>
       <td>
-        {props.goalesScored}
+        {props.goales_scored}
       </td>
       <td>
-        {props.goalesMissed}
+        {props.goales_missed}
       </td>
       <td className="team-points">
         {props.points}

@@ -1,6 +1,5 @@
 import React from "react";
-
-import LeagueTable from "../components/LeagueTable/LeagueTable";
+import {Link} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -9,7 +8,7 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip
+  Button
 } from "reactstrap";
 
 // core components
@@ -17,7 +16,7 @@ import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import CreateNewTeamModal from "../components/CreateNewTeamModal/CreateNewTeamModal";
 
-class TableView extends React.Component {
+class ControlCenter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,12 +49,17 @@ class TableView extends React.Component {
                 <Col lg="9">
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
-                      <div className="d-flex justify-content-between">
-                        <h2>Турнирная таблица</h2>
-                        <CreateNewTeamModal  btnTitle={<i className="fas fa-plus"/>} />
-                        <UncontrolledTooltip placement="top" target="addTeam">Добавить команду</UncontrolledTooltip>
-                      </div>
-                      <LeagueTable/>
+                        <h2>Центр управления</h2>
+                      <Row>
+                        <Col>
+                          <CreateNewTeamModal  btnTitle="Добавить команду" />
+                        </Col>
+                        <Col>
+                          <Button color="info" tag={Link} to="/table-page">
+                            Турнирная таблица
+                          </Button>
+                        </Col>
+                      </Row>
                     </CardBody>
                   </Card>
                 </Col>
@@ -69,4 +73,4 @@ class TableView extends React.Component {
   }
 }
 
-export default TableView;
+export default ControlCenter;
