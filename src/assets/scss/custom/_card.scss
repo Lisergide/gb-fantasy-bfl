@@ -139,3 +139,9 @@
   width: 100%;
   height: auto;
 }
+
+@include media-breakpoint-up(lg) {
+  .control-card {
+    min-height: 223px;
+  }
+}

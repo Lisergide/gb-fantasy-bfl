@@ -87,7 +87,6 @@ export default withAuth(class NewsBox extends React.Component {
           </Link>
           <CardFooter>
             <span className="text-muted">{publicDate.toLocaleDateString()}</span>
-            {!this.state.user ? null : <>
               <CardLink
                 id={newsId}
                 href="javascript:void(0)"
@@ -105,8 +104,6 @@ export default withAuth(class NewsBox extends React.Component {
                 newsText={newsText}
                 newsDate={publicDate.toISOString().substring(0, 10)}
               />
-            </>
-            }
             {/*<CardLink className="text-primary float-right ml-3" href="#">*/}
             {/*  <i className="fas fa-edit"/>*/}
             {/*  /!*<i className="far fa-comment-alt"/>*!/*/}

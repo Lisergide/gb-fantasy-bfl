@@ -3,10 +3,21 @@ import React from "react";
 import axios from "axios";
 
 // reactstrap components
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Input} from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Table,
+  InputGroup,
+  InputGroupAddon,
+  Input
+} from "reactstrap";
 
 // ant-design components
 import {InputNumber} from "antd";
+
 // import 'antd/dist/antd.css';
 
 class LeagueTableModal extends React.Component {
@@ -15,6 +26,7 @@ class LeagueTableModal extends React.Component {
     this.state = {
       modal: false,
       team_id: 0,
+      team: this.props.team,
       games_played: this.props.games_played,
       wins: this.props.wins,
       draws: this.props.draws,
@@ -40,6 +52,10 @@ class LeagueTableModal extends React.Component {
     this.setState({
       modal: !this.state.modal
     });
+  };
+
+  handleChangeTeam = (e) => {
+    this.setState({team: e.target.value});
   };
 
   handleChangeGamesPlayed = (value) => {
@@ -68,6 +84,25 @@ class LeagueTableModal extends React.Component {
 
   handleChangePoints = (value) => {
     this.setState({points: value});
+  };
+
+  handleClickUpdateTeamName = () => {
+    axios({
+      method: 'put',
+      url: `https://fantasy-bfl.herokuapp.com/teams/${this.props.id}`,
+      data: {
+        team: this.state.team,
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        this.setState({
+          modal: false,
+        });
+        window.location.reload(true);
+      }
+      console.log(res);
+      console.log(res.status);
+    })
   };
 
   handleClickEditTeam = async () => {
@@ -122,7 +157,14 @@ class LeagueTableModal extends React.Component {
         <a href="javascript:void(0)" onClick={this.toggle}>{this.props.team}</a>
         <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle}
                className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>{this.props.team}</ModalHeader>
+          <ModalHeader toggle={this.toggle}>
+            <InputGroup>
+              <Input type="text" name="team" value={this.state.team} onChange={this.handleChangeTeam}/>
+            <InputGroupAddon addonType="append">
+              <Button color="success" onClick={this.handleClickUpdateTeamName}><i className="fas fa-check"/></Button>
+            </InputGroupAddon>
+            </InputGroup>
+          </ModalHeader>
           <ModalBody>
             <Table className="modal_table">
               <tbody className="text-center">
@@ -154,11 +196,11 @@ class LeagueTableModal extends React.Component {
                 </td>
                 <td>
                   <InputNumber type="number" name="goales_scored" min={0} value={this.state.goales_scored}
-                         onChange={this.handleChangeGoalesScored}/>
+                               onChange={this.handleChangeGoalesScored}/>
                 </td>
                 <td>
                   <InputNumber type="number" name="goales_missed" min={0} value={this.state.goales_missed}
-                         onChange={this.handleChangeGoalesMissed}/>
+                               onChange={this.handleChangeGoalesMissed}/>
                 </td>
                 <td>
                   <InputNumber type="number" name="points" value={this.state.points}
