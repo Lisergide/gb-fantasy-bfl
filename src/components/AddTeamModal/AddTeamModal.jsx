@@ -1,45 +1,109 @@
 /* eslint-disable */
 import React from "react";
 import axios from "axios";
+import {setupCache} from "axios-cache-adapter";
 
 // reactstrap components
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Input} from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Table,
+  InputGroup,
+  InputGroupAddon,
+  Label,
+  Input,
+  FormGroup,
+  CustomInput,
+} from "reactstrap";
 
 // ant-design components
 import {InputNumber} from "antd";
 // import 'antd/dist/antd.css';
 
-class LeagueTableModal extends React.Component {
+// axios-cache-adapter
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000,
+});
+
+const api = axios.create({
+  adapter: cache.adapter
+});
+
+class AddTeamModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      team: '',
       team_id: 0,
-      games_played: this.props.games_played,
-      wins: this.props.wins,
-      draws: this.props.draws,
-      looses: this.props.looses,
-      goales_scored: this.props.goales_scored,
-      goales_missed: this.props.goales_missed,
-      points: this.props.points,
-      resultsTeams: []
+      games_played: 0,
+      wins: 0,
+      draws: 0,
+      looses: 0,
+      goales_scored: 0,
+      goales_missed: 0,
+      points: 0,
+      teams: [],
+      resultsTeams: [],
+      teamFilterNoAdd: []
     };
   }
 
-  async componentDidMount() {
-    await axios.get('https://fantasy-bfl.herokuapp.com/league-table')
+  getTeams() {
+    api.get('https://fantasy-bfl.herokuapp.com/teams')
       .then(res => {
-        const resultsTeams = res.data.league_table;
-        this.setState({resultsTeams})
+        const teams = res.data.teams;
+        this.setState({teams});
+        this.getResults();
       }).catch(function (error) {
-        console.log(error);
-      });
+      console.log(error);
+    });
+  }
+
+  getResults() {
+    api.get('https://fantasy-bfl.herokuapp.com/league-table')
+      .then(async res => {
+        const resultsTeams = res.data.league_table;
+        this.setState({
+          resultsTeams,
+        });
+        this.teamFilter();
+      }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  teamFilter() {
+    const teamName = this.state.resultsTeams.map(m => m.team);
+    const teamFilterNoAdd = this.state.teams.filter(f => teamName.includes(f.team) === false);
+    this.setState({
+      teamFilterNoAdd
+    })
+  }
+
+  componentDidMount() {
+    this.getTeams();
+    // this.getResults();
   }
 
   toggle = () => {
     this.setState({
       modal: !this.state.modal
     });
+  };
+
+  handleChangeTeam = (e) => {
+    const team = e.target.value;
+    const index = e.target.options.selectedIndex;
+    const optionElement = e.target.childNodes[index];
+    const team_id = optionElement.getAttribute('id');
+    this.setState({
+      team: team,
+      team_id: team_id,
+    })
   };
 
   handleChangeGamesPlayed = (value) => {
@@ -70,12 +134,12 @@ class LeagueTableModal extends React.Component {
     this.setState({points: value});
   };
 
-  handleClickEditTeam = async () => {
-    await axios({
-      method: 'put',
-      url: `https://fantasy-bfl.herokuapp.com/league-table/${this.props.id}`,
+  handleClickAddToLeagueTable = () => {
+    axios({
+      method: 'post',
+      url: `https://fantasy-bfl.herokuapp.com/league-table/create`,
       data: {
-        team_id: this.props.team_id,
+        team_id: this.state.team_id,
         games_played: this.state.games_played,
         wins: this.state.wins,
         draws: this.state.draws,
@@ -93,37 +157,30 @@ class LeagueTableModal extends React.Component {
       }
       console.log(res);
       console.log(res.status);
-    })
-  };
-
-  handleClickDeleteTeam = async () => {
-    await axios({
-      method: 'post',
-      url: `https://fantasy-bfl.herokuapp.com/league-table/delete`,
-      data: {
-        id: this.props.id,
-      }
-    }).then(res => {
-      if (res.status === 200) {
-        this.setState({
-          modal: false,
-        });
-        window.location.reload(true);
-      }
-      console.log(res);
-      console.log(res.status);
-    })
+    });
   };
 
   render() {
+    // console.log(this.state.teams);
+    // console.log(this.state.resultsTeams);
+    const {teams, team, team_id, resultsTeams, teamFilterNoAdd} = this.state;
 
     return (
       <div>
-        <a href="javascript:void(0)" onClick={this.toggle}>{this.props.team}</a>
+        <Button id="addTeam" color="primary" onClick={this.toggle}>{this.props.btnTitle}</Button>
         <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle}
                className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>{this.props.team}</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Добавить команду</ModalHeader>
           <ModalBody>
+            <FormGroup>
+              <Label for="team">Название команды</Label>
+              <CustomInput type="select" name="team" id="team" value={this.state.team} onChange={this.handleChangeTeam}>
+                <option value="">Выберите команду</option>
+                {teamFilterNoAdd.map(team =>
+                  <option key={team.id} id={team.id} value={team.team}>{team.team}</option>
+                )}
+              </CustomInput>
+            </FormGroup>
             <Table className="modal_table">
               <tbody className="text-center">
               <tr className="table-head">
@@ -154,11 +211,11 @@ class LeagueTableModal extends React.Component {
                 </td>
                 <td>
                   <InputNumber type="number" name="goales_scored" min={0} value={this.state.goales_scored}
-                         onChange={this.handleChangeGoalesScored}/>
+                               onChange={this.handleChangeGoalesScored}/>
                 </td>
                 <td>
                   <InputNumber type="number" name="goales_missed" min={0} value={this.state.goales_missed}
-                         onChange={this.handleChangeGoalesMissed}/>
+                               onChange={this.handleChangeGoalesMissed}/>
                 </td>
                 <td>
                   <InputNumber type="number" name="points" value={this.state.points}
@@ -167,11 +224,10 @@ class LeagueTableModal extends React.Component {
               </tr>
               </tbody>
             </Table>
-            <Button className="float-right" color="danger" onClick={this.handleClickDeleteTeam}>Удалить команду</Button>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Отменить</Button>{' '}
-            <Button color="primary" onClick={this.handleClickEditTeam}>Сохранить</Button>
+            <Button color="primary" onClick={this.handleClickAddToLeagueTable}>Добавить</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -179,4 +235,4 @@ class LeagueTableModal extends React.Component {
   }
 }
 
-export default LeagueTableModal;
+export default AddTeamModal;

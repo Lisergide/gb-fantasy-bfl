@@ -13,6 +13,7 @@ const LeagueTableRow = (props) => {
         {/*</div>*/}
         <span>
             <LeagueTableModal
+              id={props.id}
               team_id={props.team_id}
               team={props.team}
               games_played={props.games_played}

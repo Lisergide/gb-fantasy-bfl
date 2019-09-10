@@ -16,14 +16,14 @@ class LeagueTable extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         const rows = [];
-        console.log(responseJson);
+        // console.log(responseJson);
         responseJson.league_table.map(
           (item, index) => {
-            const {team, team_id, games_played, wins, draws, looses, goales_scored, goales_missed, points} = item;
+            const {id, team, team_id, games_played, wins, draws, looses, goales_scored, goales_missed, points} = item;
 
             return (
               rows.push(
-                <LeagueTableRow key={index} team_id={team_id} position={index} team={team} games_played={games_played} wins={wins} draws={draws} looses={looses} goales_scored={goales_scored} goales_missed={goales_missed} points={points} />
+                <LeagueTableRow key={index} id={id} team_id={team_id} position={index} team={team} games_played={games_played} wins={wins} draws={draws} looses={looses} goales_scored={goales_scored} goales_missed={goales_missed} points={points} />
               )
             )
           }

@@ -15,7 +15,7 @@ import {
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import CreateNewTeamModal from "../components/CreateNewTeamModal/CreateNewTeamModal";
+import AddTeamModal from "../components/AddTeamModal/AddTeamModal";
 
 class TableView extends React.Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class TableView extends React.Component {
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="d-flex justify-content-between">
                         <h2>Турнирная таблица</h2>
-                        <CreateNewTeamModal  btnTitle={<i className="fas fa-plus"/>} />
+                        <AddTeamModal  btnTitle={<i className="fas fa-plus"/>} />
                         <UncontrolledTooltip placement="top" target="addTeam">Добавить команду</UncontrolledTooltip>
                       </div>
                       <LeagueTable/>
