@@ -44,9 +44,7 @@ class ControlCenter extends React.Component {
               <span />
               <span />
             </div>
-            <Container className="pt-lg-md">
-              <Row className="justify-content-center">
-                <Col lg="9">
+            <Container>
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
                         <h2>Центр управления</h2>
@@ -62,8 +60,6 @@ class ControlCenter extends React.Component {
                       </Row>
                     </CardBody>
                   </Card>
-                </Col>
-              </Row>
             </Container>
           </section>
         </main>

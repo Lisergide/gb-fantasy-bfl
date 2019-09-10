@@ -43,7 +43,6 @@ class LeagueTableModal extends React.Component {
   };
 
   handleChangeGamesPlayed = (value) => {
-    console.log(value);
     this.setState({games_played: value});
   };
 

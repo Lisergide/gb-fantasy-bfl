@@ -2,6 +2,8 @@
 import React from "react";
 import axios from "axios";
 
+import InputModalTable from "../InputModalTable/InputModalTable";
+
 // reactstrap components
 import {
   Button,
@@ -74,7 +76,7 @@ class CreateNewTeamModal extends React.Component {
     const optionElement = e.target.childNodes[index];
     const team_id = optionElement.getAttribute('id');
 
-    const resultsTeamSelect = this.state.resultsTeams.filter(f => f.team_id === +team_id);
+    const resultsTeamSelect = this.state.resultsTeams.filter(f => f.team_id !== +team_id);
     resultsTeamSelect.map(result =>
       this.setState({
         team: team,
@@ -165,45 +167,47 @@ class CreateNewTeamModal extends React.Component {
                 )}
               </CustomInput>
             </FormGroup>
-            <Table className="modal_table mt-3">
-              <tbody className="text-center">
-              <tr className="table-head">
-                <td title="Игры">И</td>
-                <td title="Победы">В</td>
-                <td title="Ничьи">Н</td>
-                <td title="Поражения">П</td>
-                <td title="Забито мячей">ЗМ</td>
-                <td title="Пропущено мячей">ПМ</td>
-                <td title="Очки">О</td>
-              </tr>
-              <tr>
-                <td>
-                  <Input type="text" name="games_played" value={this.state.games_played}
-                         onChange={this.handleChangeGamesPlayed}/>
-                </td>
-                <td>
-                  <Input type="text" name="wins" value={this.state.wins} onChange={this.handleChangeWins}/>
-                </td>
-                <td>
-                  <Input type="text" name="draws" value={this.state.draws} onChange={this.handleChangeDraws}/>
-                </td>
-                <td>
-                  <Input type="text" name="looses" value={this.state.looses} onChange={this.handleChangeLooses}/>
-                </td>
-                <td>
-                  <Input type="text" name="goales_scored" value={this.state.goales_scored}
-                         onChange={this.handleChangeGoalesScored}/>
-                </td>
-                <td>
-                  <Input type="text" name="goales_missed" value={this.state.goales_missed}
-                         onChange={this.handleChangeGoalesMissed}/>
-                </td>
-                <td>
-                  <Input type="text" name="points" value={this.state.points} onChange={this.handleChangePoints}/>
-                </td>
-              </tr>
-              </tbody>
-            </Table>
+
+            <InputModalTable />
+            {/*<Table className="modal_table mt-3">*/}
+            {/*  <tbody className="text-center">*/}
+            {/*  <tr className="table-head">*/}
+            {/*    <td title="Игры">И</td>*/}
+            {/*    <td title="Победы">В</td>*/}
+            {/*    <td title="Ничьи">Н</td>*/}
+            {/*    <td title="Поражения">П</td>*/}
+            {/*    <td title="Забито мячей">ЗМ</td>*/}
+            {/*    <td title="Пропущено мячей">ПМ</td>*/}
+            {/*    <td title="Очки">О</td>*/}
+            {/*  </tr>*/}
+            {/*  <tr>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="games_played" value={this.state.games_played}*/}
+            {/*             onChange={this.handleChangeGamesPlayed}/>*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="wins" value={this.state.wins} onChange={this.handleChangeWins}/>*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="draws" value={this.state.draws} onChange={this.handleChangeDraws}/>*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="looses" value={this.state.looses} onChange={this.handleChangeLooses}/>*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="goales_scored" value={this.state.goales_scored}*/}
+            {/*             onChange={this.handleChangeGoalesScored}/>*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="goales_missed" value={this.state.goales_missed}*/}
+            {/*             onChange={this.handleChangeGoalesMissed}/>*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*      <Input type="text" name="points" value={this.state.points} onChange={this.handleChangePoints}/>*/}
+            {/*    </td>*/}
+            {/*  </tr>*/}
+            {/*  </tbody>*/}
+            {/*</Table>*/}
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Отменить</Button>{' '}
