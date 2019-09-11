@@ -9,22 +9,24 @@ import {
   Container,
   Row,
   Col,
-  Button
+  Button, UncontrolledTooltip
 } from "reactstrap";
 
 // core components
-import Header from "components/Header/Header.jsx";
-import Footer from "components/Footer/Footer.jsx";
-import CreateNewTeam from "components/CreateNewTeam/CreateNewTeam.jsx";
-import NewsBox from "components/NewsBox/NewsBox";
-import CreateNewsModal from "components/CreateNewsModal/CreateNewsModal";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import CreateNewTeam from "../components/CreateNewTeam/CreateNewTeam";
+import CreateNewsModal from "../components/CreateNewsModal/CreateNewsModal";
+import AdminNews from "../components/AdminNews/AdminNews";
+import DeleteTeam from "../components/DeleteTeam/DeleteTeam";
+// import EditTeam from "../components/EditTeam/EditTeam";
 
 
 class ControlCenter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      news: [],
+      team: '',
     };
   }
 
@@ -39,6 +41,11 @@ class ControlCenter extends React.Component {
       });
   }
 
+  getTeamName = (value) => {
+    this.setState({team: value});
+    console.log(this.state.team)
+  };
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -48,7 +55,6 @@ class ControlCenter extends React.Component {
   }
 
   render() {
-    const { news } = this.state;
     return (
       <>
         <Header/>
@@ -76,8 +82,10 @@ class ControlCenter extends React.Component {
                 <Col lg="6" sm="12" className="mb-4">
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
-                      <h3>Создание команды</h3>
-                      <CreateNewTeam btnTitle="Добавить команду"/>
+                      <h3>Управление командами</h3>
+                      <CreateNewTeam />
+                      <DeleteTeam getTeamName={this.getTeamName} />
+                      {/*<EditTeam team={this.state.team }/>*/}
                     </CardBody>
                   </Card>
                 </Col>
@@ -88,8 +96,8 @@ class ControlCenter extends React.Component {
                       <Button color="info" tag={Link} to="/table-page">
                         Турнирная таблица
                       </Button>
-                      <Button color="warning" tag={Link} to="/table-page">
-                        Календарь игр
+                      <Button color="warning" tag={Link} to="/results-page">
+                        Результаты игр
                       </Button>
                     </CardBody>
                   </Card>
@@ -99,37 +107,12 @@ class ControlCenter extends React.Component {
                 <Col className="mb-4">
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
-                      <h3>Управление новостями</h3>
-                      <div className="news_block">
-                        <Row>
-                          {news.map(item =>
-                            <Col key={item.id} sm="6" lg="4" className="d-flex justify-content-center">
-                              <NewsBox
-                                link={`/news-page/${item.id}`}
-                                newsTitle={item.title}
-                                newsDate={item.news_date}
-                                newsId={item.id}
-                                newsText={item.text}
-                                backgroundImg={
-                                  // "https://via.placeholder.com/343x229"
-                                  item.imgfilename === null
-                                    ? "https://via.placeholder.com/343x229"
-                                    :  item.imgfilename
-                                }
-                              />
-                            </Col>
-                          )}
-                            <Col sm="6" lg="4" className="d-flex justify-content-center">
-                              <CreateNewsModal
-                                btnClassName="btn-add-news shadow border-0"
-                                btnColor="muted"
-                                btnLabel="Добавить новость"
-                                modalTitle="Добавление новости"
-                                btnIcon={<i className="fas fa-plus"/>}
-                              />
-                            </Col>
-                        </Row>
+                      <div className="d-flex justify-content-between">
+                        <h3>Управление новостями</h3>
+                        <CreateNewsModal modalTitle="Добавление новости" btnTitle={<i className="fas fa-plus"/>} />
+                        <UncontrolledTooltip placement="top" target="addNews">Добавить новость</UncontrolledTooltip>
                       </div>
+                      <AdminNews/>
                     </CardBody>
                   </Card>
                 </Col>

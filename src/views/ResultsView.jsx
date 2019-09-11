@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 // reactstrap components
 import {
   Card,
@@ -9,16 +7,15 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip
+  // UncontrolledTooltip
 } from "reactstrap";
 
 // core components
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import LeagueTable from "../components/LeagueTable/LeagueTable";
-import AddTeamModal from "../components/AddTeamModal/AddTeamModal";
+import ResultsTable from "../components/ResultsTable/ResultsTable";
 
-class TableView extends React.Component {
+class ResultsView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,11 +49,11 @@ class TableView extends React.Component {
                   <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="d-flex justify-content-between">
-                        <h2>Турнирная таблица</h2>
-                        <AddTeamModal btnTitle={<i className="fas fa-plus"/>} />
-                        <UncontrolledTooltip placement="top" target="addTeam">Добавить команду</UncontrolledTooltip>
+                        <h2>Результаты</h2>
+                        {/*<AddTeamModal btnTitle={<i className="fas fa-plus"/>} />*/}
+                        {/*<UncontrolledTooltip placement="top" target="addTeam">Добавить команду</UncontrolledTooltip>*/}
                       </div>
-                      <LeagueTable/>
+                      <ResultsTable />
                     </CardBody>
                   </Card>
                 </Col>
@@ -70,4 +67,4 @@ class TableView extends React.Component {
   }
 }
 
-export default TableView;
+export default ResultsView;

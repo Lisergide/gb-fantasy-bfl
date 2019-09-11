@@ -7,7 +7,6 @@ import {Security} from '@okta/okta-react';
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/scss/argon-design-system-react.scss";
 
-
 // okta config file
 import config from './app.config';
 

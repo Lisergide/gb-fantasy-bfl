@@ -1,8 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import {withAuth} from "@okta/okta-react";
 import {Link} from "react-router-dom";
-import axios from "axios";
 
 // reactstrap components
 import {
@@ -12,67 +10,17 @@ import {
   CardTitle,
   CardImg,
   CardImgOverlay,
-  Button,
 } from "reactstrap";
 
-import EditNewsModal from "../EditNewsModal/EditNewsModal";
-
-export default withAuth(class NewsBox extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {user: null};
-    this._isMounted = false;
-    this.getCurrentUser = this.getCurrentUser.bind(this);
-    // this.handleClickDeleteNews = this.handleClickDeleteNews.bind(this);
-  }
-
-  async getCurrentUser() {
-    this.props.auth.getUser()
-      .then(user => { if(this._isMounted) {
-        this.setState({user})
-      }});
-  };
-
-  componentDidMount() {
-    this._isMounted = true;
-    this.getCurrentUser();
-  }
-
-  handleClickDeleteNews = async (e) => {
-    e.preventDefault();
-    // console.log(e.target.id);
-    await axios({
-      method: 'post',
-      url: 'https://fantasy-bfl.herokuapp.com/news/delete',
-      data: {
-        id: e.target.id
-      }
-    }).then(res => {
-      if (res.status === 200) {
-
-        window.location.reload(true);
-      }
-      console.log(res);
-      console.log(res.status);
-    })
-  };
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  render() {
+const NewsBox = (props) => {
     const {
       link,
       newsTitle,
       newsDate,
-      newsId,
-      newsText,
       // likes,
       // comments,
       backgroundImg
-    } = this.props;
+    } = props;
 
     const publicDate = new Date(newsDate);
 
@@ -87,23 +35,10 @@ export default withAuth(class NewsBox extends React.Component {
           </Link>
           <CardFooter>
             <span className="text-muted">{publicDate.toLocaleDateString()}</span>
-              <CardLink
-                id={newsId}
-                href="javascript:void(0)"
-                color="link"
-                className="text-danger float-right ml-3"
-                onClick={this.handleClickDeleteNews}
-              >
-                <i id={newsId} className="fas fa-trash-alt"/>
+              {/*<CardLink className="text-primary float-right ml-3" href="#">*/}
                 {/*<i className="far fa-thumbs-up"/>*/}
                 {/*<span className="pl-1">{likes}</span>*/}
-              </CardLink>
-              < EditNewsModal
-                newsId={newsId}
-                newsTitle={newsTitle}
-                newsText={newsText}
-                newsDate={publicDate.toISOString().substring(0, 10)}
-              />
+              {/*</CardLink>*/}
             {/*<CardLink className="text-primary float-right ml-3" href="#">*/}
             {/*  <i className="fas fa-edit"/>*/}
             {/*  /!*<i className="far fa-comment-alt"/>*!/*/}
@@ -113,5 +48,6 @@ export default withAuth(class NewsBox extends React.Component {
         </Card>
       </div>
     );
-  };
-})
+};
+
+export default NewsBox;

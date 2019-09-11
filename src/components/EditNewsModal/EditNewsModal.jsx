@@ -16,6 +16,8 @@ import {
   CardLink,
   Progress,
 } from "reactstrap";
+
+// firebase storage
 import {storage} from "../../firebase";
 
 export default class EditNewsModal extends React.Component {
@@ -115,9 +117,9 @@ export default class EditNewsModal extends React.Component {
     const {newsTitle, newsText, newsDate} = this.state;
     const {btnColor, modalClassName, modalTitle} = this.props;
     return <>
-      <CardLink className="text-primary float-right ml-3" href="javascript:void(0)" onClick={this.toggle}>
+      <Button color="primary" onClick={this.toggle}>
         <i className="fas fa-edit"/>
-      </CardLink>
+      </Button>
       <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle} className={modalClassName}>
         <ModalHeader toggle={this.toggle}>Редактирование новости</ModalHeader>
         <ModalBody>
@@ -171,9 +173,9 @@ export default class EditNewsModal extends React.Component {
           <Button color="secondary" onClick={this.toggle}>Отменить</Button>
           <Button color="primary"
                   onClick={this.state.newsImg === null
-                    ? this.handleClickCreateNews
+                    ? this.handleClickEditNews
                     : this.handleClickUploadImg}>
-            Опубликовать
+            Сохранить
           </Button>
         </ModalFooter>
       </Modal>

@@ -1,5 +1,4 @@
 import React from "react";
-import {withAuth} from "@okta/okta-react";
 import axios from "axios";
 
 // reactstrap components
@@ -15,45 +14,38 @@ import {
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import NewsBox from "components/NewsBox/NewsBox";
-import CreateNewsModal from "components/CreateNewsModal/CreateNewsModal";
 // import {Link} from "react-router-dom";
 
-export default withAuth(class Home extends React.Component {
+class Home extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
       news: [],
     };
-    // this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
-  getCurrentUser = async () => {
-    this.props.auth.getUser()
-      .then(user => this.setState({user}));
-  };
+  getNews() {
+    axios.get("https://fantasy-bfl.herokuapp.com/news")
+      .then(res => {
+        const data = res.data.results;
+        this.setState({ news: data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
 
   componentDidMount() {
-    this.getCurrentUser();
-
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
 
-    axios.get("https://fantasy-bfl.herokuapp.com/news")
-        .then(res => {
-          const data = res.data.results;
-          this.setState({ news: data });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    this.getNews();
   }
 
   render() {
     const { news } = this.state;
-    // console.log(news);
     return (
       <>
         <Header/>
@@ -90,11 +82,11 @@ export default withAuth(class Home extends React.Component {
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
                         <a href="#pablo" onClick={e => e.preventDefault()}>
-                          <img
-                            alt="..."
-                            // className="rounded-circle"
-                            src={require("assets/img/brand/bflmafia_logo.png")}
-                          />
+                          {/*<img*/}
+                          {/*  alt="..."*/}
+                          {/*  // className="rounded-circle"*/}
+                          {/*  src={require("assets/img/brand/bflmafia_logo.png")}*/}
+                          {/*/>*/}
                         </a>
                       </div>
                     </Col>
@@ -190,29 +182,14 @@ export default withAuth(class Home extends React.Component {
                             // likes="10"
                             // comments="5"
                             backgroundImg={
-                              // "https://via.placeholder.com/343x229"
-                              item.imgfilename === null
-                                ? "https://via.placeholder.com/343x229"
-                                :  item.imgfilename
+                              "https://via.placeholder.com/343x229"
+                              // item.imgfilename === null
+                              //   ? "https://via.placeholder.com/343x229"
+                              //   :  item.imgfilename
                             }
                           />
                       </Col>
                     )}
-                    {!this.state.user ? null :
-                      <Col sm="6" lg="4" className="d-flex justify-content-center">
-                        <CreateNewsModal
-                          btnClassName="btn-add-news shadow border-0"
-                          btnColor="muted"
-                          btnLabel="Добавить новость"
-                          modalTitle="Добавление новости"
-                          btnIcon={<i className="fas fa-plus"/>}
-                        />
-                        {/*<Button className="btn-add-news shadow border-0" color="muted">*/}
-                        {/*  <span className="btn-add-news__plus"><i className="fas fa-plus"/></span> <br/>*/}
-                        {/*  <span className="btn-add-news__title">Добавить новость</span>*/}
-                        {/*</Button>*/}
-                      </Col>
-                    }
                   </Row>
                   {/*<Row className="justify-content-center my-3">*/}
                   {/*  <Col lg="9" className="d-flex justify-content-center">*/}
@@ -230,4 +207,6 @@ export default withAuth(class Home extends React.Component {
       </>
     );
   }
-})
+}
+
+export default Home;

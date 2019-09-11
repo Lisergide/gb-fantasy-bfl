@@ -113,12 +113,14 @@ export default class CreateNewsModal extends React.Component {
 
   render() {
     // console.log(this.state.newsImgUrl);
-    const {btnLabel, btnIcon, btnClassName, btnColor, modalClassName, modalTitle} = this.props;
-    return <>
-      <Button className={btnClassName} color={btnColor} onClick={this.toggle}>
-        <span className="btn-add-news__plus">{btnIcon}</span> <br/>
-        <span className="btn-add-news__title">{btnLabel}</span>
-      </Button>
+    const {btnTitle, modalClassName, modalTitle} = this.props;
+    return (
+      <div>
+      <Button id="addNews" color="success" onClick={this.toggle}>{btnTitle}</Button>
+      {/*<Button className={btnClassName} color={btnColor} onClick={this.toggle}>*/}
+      {/*  <span className="btn-add-news__plus">{btnIcon}</span> <br/>*/}
+      {/*  <span className="btn-add-news__title">{btnLabel}</span>*/}
+      {/*</Button>*/}
       <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle} className={modalClassName}>
         <ModalHeader toggle={this.toggle}>{modalTitle}</ModalHeader>
         <ModalBody>
@@ -177,6 +179,7 @@ export default class CreateNewsModal extends React.Component {
           </Button>
         </ModalFooter>
       </Modal>
-    </>
+    </div>
+    )
   }
 }

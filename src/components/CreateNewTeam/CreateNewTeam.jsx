@@ -42,13 +42,20 @@ class CreateNewTeam extends React.Component {
   render() {
     return (
       <div>
-            <Label for="team">Название команды</Label>
-            <InputGroup>
-              <Input type="text" name="team" id="team" value={this.state.team} onChange={this.handleChangeTeam}/>
-              <InputGroupAddon addonType="append">
-                <Button color="success" onClick={this.handleClickCreateTeam}>Создать</Button>
-              </InputGroupAddon>
-            </InputGroup>
+        <Label for="team">Создание команды</Label>
+        <InputGroup>
+          <Input
+            id="team"
+            type="text"
+            name="team"
+            placeholder="Введите название команды"
+            value={this.state.team}
+            onChange={this.handleChangeTeam}
+          />
+          <InputGroupAddon addonType="append">
+            <Button color="success" onClick={this.handleClickCreateTeam}>Создать</Button>
+          </InputGroupAddon>
+        </InputGroup>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 
+// core components
 import LeagueTableRow from "./LeagueTableRow";
 import LeagueTableBody from "./LeagueTableBody";
 

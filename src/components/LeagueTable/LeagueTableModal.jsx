@@ -25,7 +25,7 @@ class LeagueTableModal extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      team_id: 0,
+      team_id: this.props.team_id,
       team: this.props.team,
       games_played: this.props.games_played,
       wins: this.props.wins,
@@ -89,7 +89,7 @@ class LeagueTableModal extends React.Component {
   handleClickUpdateTeamName = () => {
     axios({
       method: 'put',
-      url: `https://fantasy-bfl.herokuapp.com/teams/${this.props.id}`,
+      url: `https://fantasy-bfl.herokuapp.com/teams/${this.props.team_id}`,
       data: {
         team: this.state.team,
       }
@@ -160,9 +160,9 @@ class LeagueTableModal extends React.Component {
           <ModalHeader toggle={this.toggle}>
             <InputGroup>
               <Input type="text" name="team" value={this.state.team} onChange={this.handleChangeTeam}/>
-            <InputGroupAddon addonType="append">
-              <Button color="success" onClick={this.handleClickUpdateTeamName}><i className="fas fa-check"/></Button>
-            </InputGroupAddon>
+              <InputGroupAddon addonType="append">
+                <Button color="success" onClick={this.handleClickUpdateTeamName}><i className="fas fa-check"/></Button>
+              </InputGroupAddon>
             </InputGroup>
           </ModalHeader>
           <ModalBody>
@@ -209,7 +209,9 @@ class LeagueTableModal extends React.Component {
               </tr>
               </tbody>
             </Table>
-            <Button className="float-right" color="danger" onClick={this.handleClickDeleteTeam}>Удалить команду</Button>
+            <Button className="float-right" color="danger" onClick={this.handleClickDeleteTeam}>
+              Удалить команду из таблицы
+            </Button>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Отменить</Button>{' '}

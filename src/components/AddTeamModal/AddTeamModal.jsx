@@ -81,7 +81,7 @@ class AddTeamModal extends React.Component {
     const teamFilterNoAdd = this.state.teams.filter(f => teamName.includes(f.team) === false);
     this.setState({
       teamFilterNoAdd
-    })
+    });
   }
 
   componentDidMount() {
@@ -163,11 +163,11 @@ class AddTeamModal extends React.Component {
   render() {
     // console.log(this.state.teams);
     // console.log(this.state.resultsTeams);
-    const {teams, team, team_id, resultsTeams, teamFilterNoAdd} = this.state;
+    const { teamFilterNoAdd } = this.state;
 
     return (
       <div>
-        <Button id="addTeam" color="primary" onClick={this.toggle}>{this.props.btnTitle}</Button>
+        <Button id="addTeam" color="success" onClick={this.toggle}>{this.props.btnTitle}</Button>
         <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle}
                className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Добавить команду</ModalHeader>

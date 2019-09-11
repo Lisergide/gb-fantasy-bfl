@@ -6,6 +6,7 @@ import Register from "views/Register";
 import TableView from "views/TableView";
 import News from "views/News";
 import ControlCenter from "views/ControlCenter";
+import ResultsView from "views/ResultsView";
 
 export default [
   {
@@ -42,6 +43,11 @@ export default [
     path: '/control-page',
     exact: true,
     component: ControlCenter,
+  },
+  {
+    path: '/results-page',
+    exact: true,
+    component: ResultsView,
   }
 
 ]
