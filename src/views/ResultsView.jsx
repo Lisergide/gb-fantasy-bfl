@@ -7,13 +7,14 @@ import {
   Container,
   Row,
   Col,
-  // UncontrolledTooltip
+  UncontrolledTooltip
 } from "reactstrap";
 
 // core components
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import ResultsTable from "../components/ResultsTable/ResultsTable";
+import AddResultsModal from "../components/AddResultsModal/AddResultsModal";
 
 class ResultsView extends React.Component {
   constructor(props) {
@@ -50,8 +51,8 @@ class ResultsView extends React.Component {
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="d-flex justify-content-between">
                         <h2>Результаты</h2>
-                        {/*<AddTeamModal btnTitle={<i className="fas fa-plus"/>} />*/}
-                        {/*<UncontrolledTooltip placement="top" target="addTeam">Добавить команду</UncontrolledTooltip>*/}
+                        <AddResultsModal btnTitle={<i className="fas fa-plus"/>} />
+                        <UncontrolledTooltip placement="top" target="addResults">Добавить матч</UncontrolledTooltip>
                       </div>
                       <ResultsTable />
                     </CardBody>

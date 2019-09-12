@@ -3,7 +3,7 @@ import {Table} from 'reactstrap';
 
 const LeagueTableBody = (props) => {
   return (
-    <Table className="standings">
+    <Table size="sm" className="standings">
       <tbody>
       <tr className="table-head">
         <td className="team-position">

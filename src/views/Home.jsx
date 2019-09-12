@@ -28,8 +28,14 @@ class Home extends React.Component {
   getNews() {
     axios.get("https://fantasy-bfl.herokuapp.com/news")
       .then(res => {
-        const data = res.data.results;
-        this.setState({ news: data });
+        const news = res.data.results;
+        const newsSort = news.sort(function (a, b) {
+          const dateA = new Date(a.news_date);
+          const dateB = new Date(b.news_date);
+
+          return dateB-dateA;
+        });
+        this.setState({ news: newsSort });
       })
       .catch(function(error) {
         console.log(error);

@@ -18,7 +18,7 @@ import Footer from "../components/Footer/Footer.jsx";
 import LeagueTable from "../components/LeagueTable/LeagueTable";
 import AddTeamModal from "../components/AddTeamModal/AddTeamModal";
 
-class TableView extends React.Component {
+class LeagueTableView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,4 +70,4 @@ class TableView extends React.Component {
   }
 }
 
-export default TableView;
+export default LeagueTableView;

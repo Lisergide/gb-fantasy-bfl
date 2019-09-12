@@ -19,7 +19,13 @@ class AdminNews extends React.Component {
         const rows = [];
         const news = res.data.results;
 
-        news.map((item, index) => {
+        const newsSort = news.sort(function (a, b) {
+          const dateA = new Date(a.news_date);
+          const dateB = new Date(b.news_date);
+
+          return dateB-dateA;
+        });
+        newsSort.map((item, index) => {
             const {id, news_date, title, text, imgfilename} = item;
 
             return (

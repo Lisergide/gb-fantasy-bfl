@@ -1,55 +1,87 @@
+/* eslint-disable */
 import React, {Component} from "react";
 import axios from "axios";
 
-import ResultsTableRow from "./ResultsTableRow";
+import * as d3 from "d3-collection";
+
+// reactstrap component
+import { Table, Button } from "reactstrap";
+
+
 
 
 class ResultsTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: []
+      groupByDate: []
     };
   }
 
   getData() {
     axios.get('https://fantasy-bfl.herokuapp.com/results')
       .then(res => {
-        const rows = [];
         const results = res.data.results;
-
-        results.map((item, index) => {
-          const {date, time, home, guest, hometeamgoals, guestteamgoals} = item;
-
-          return (
-            rows.push(
-              <ResultsTableRow key={index}
-                               position={index}
-                               date={date}
-                               time={time}
-                               home={home}
-                               guest={guest}
-                               hometeamgoals={hometeamgoals}
-                               guestteamgoals={guestteamgoals}/>
-            )
-          )
-        });
+        const d3Group = d3.nest()
+          .key(function(d) {return d.date;})
+          .entries(results);
         this.setState({
-          rows: rows
-        })
-      }).catch(error => {
-      console.log(error);
-    });
+          groupByDate: d3Group
+        });
+      });
   }
 
   componentDidMount() {
     this.getData();
   }
 
+  handleClickDeleteResult = async (e) => {
+    e.preventDefault();
+    await axios({
+      method: 'post',
+      url: 'https://fantasy-bfl.herokuapp.com/results/delete',
+      data: {
+        id: e.target.id
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        window.location.reload(true);
+      }
+      console.log(res);
+      console.log(res.status);
+    })
+  };
+
   render() {
     return (
       <div>
-
+        <Table size="sm">
+          {this.state.groupByDate.map((item, idx) =>
+            <tbody key={idx}>
+          <tr>
+            <td colSpan={6} align="center" className="font-weight-bold">{item.key}</td>
+          </tr>
+          {item.values.map((t, i) =>
+          <tr key={i}>
+            <td>{t.time}</td>
+            <td>{t.home}</td>
+            <td>{t.hometeamgoals} : {t.guestteamgoals}</td>
+            <td>{t.guest}</td>
+            <td style={{ width: "25px"}}>
+              <a href="javascript:void(0)" className="text-primary">
+                <i className="fas fa-edit"/>
+              </a>
+            </td>
+            <td style={{ width: "25px"}}>
+              <a href="javascript:void(0)" id={t.id} className="text-danger" onClick={this.handleClickDeleteResult}>
+                <i id={t.id} className="fas fa-trash-alt"/>
+              </a>
+            </td>
+          </tr>
+          )}
+            </tbody>
+          )}
+        </Table>
       </div>
     )
   }

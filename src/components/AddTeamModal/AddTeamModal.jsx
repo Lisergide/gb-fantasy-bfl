@@ -22,8 +22,8 @@ import {
 // ant-design components
 import {InputNumber} from "antd";
 // import 'antd/dist/antd.css';
-
 // axios-cache-adapter
+
 const cache = setupCache({
   maxAge: 15 * 60 * 1000,
 });
@@ -86,7 +86,6 @@ class AddTeamModal extends React.Component {
 
   componentDidMount() {
     this.getTeams();
-    // this.getResults();
   }
 
   toggle = () => {

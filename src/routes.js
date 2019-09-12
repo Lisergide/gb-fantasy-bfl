@@ -3,7 +3,7 @@ import Home from "views/Home";
 import Landing from "views/Landing";
 import Login from "views/Login";
 import Register from "views/Register";
-import TableView from "views/TableView";
+import LeagueTableView from "views/LeagueTableView";
 import News from "views/News";
 import ControlCenter from "views/ControlCenter";
 import ResultsView from "views/ResultsView";
@@ -32,7 +32,7 @@ export default [
   {
     path: '/table-page',
     exact: true,
-    component: TableView,
+    component: LeagueTableView,
   },
   {
     path: '/news-page/:id',
@@ -49,5 +49,4 @@ export default [
     exact: true,
     component: ResultsView,
   }
-
 ]
