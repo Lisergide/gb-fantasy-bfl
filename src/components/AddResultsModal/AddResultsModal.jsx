@@ -4,10 +4,32 @@ import axios from "axios";
 import moment from "moment"
 
 // reactstrap components
-import {Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Label, CustomInput, FormGroup} from "reactstrap";
+import {
+  Button,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  CustomInput,
+  FormGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Input
+} from "reactstrap";
 
 // antd components
-import {DatePicker} from "antd";
+// import {InputNumber} from "antd";
+
+// react plugin used to create datetimepicker
+import Datetime from "react-datetime";
+
+// core components
+import Datepicker from "../Datepicker/Datepicker";
+import {InputNumber} from "antd";
 
 class AddResultsModal extends React.Component {
   constructor(props) {
@@ -15,13 +37,13 @@ class AddResultsModal extends React.Component {
     this.state = {
       modal: false,
       date: '',
-      weekday: '',
       time: '',
-      year: '',
       home: '',
+      homeTeamId: 0,
       guest: '',
-      hometeamgoals: 0,
-      guestteamgoals: 0,
+      guestTeamId: 0,
+      homeTeamGoals: 0,
+      guestTeamGoals: 0,
       teams: [],
     };
   }
@@ -47,11 +69,67 @@ class AddResultsModal extends React.Component {
   };
 
   handleChangeHomeTeam = (e) => {
-    this.setState({home: e.target.value})
+    const home = e.target.value;
+    const index = e.target.options.selectedIndex;
+    const optionElement = e.target.childNodes[index];
+    const homeTeamId = optionElement.getAttribute('id');
+    console.log(homeTeamId);
+    this.setState({
+      home: home,
+      homeTeamId: homeTeamId,
+    });
   };
 
   handleChangeGuestTeam = (e) => {
-    this.setState({guest: e.target.value})
+    const guest = e.target.value;
+    const index = e.target.options.selectedIndex;
+    const optionElement = e.target.childNodes[index];
+    const guestTeamId = optionElement.getAttribute('id');
+    console.log(guestTeamId);
+    this.setState({
+      guest: guest,
+      guestTeamId: guestTeamId,
+    });
+  };
+
+  handleChangeTime = (moment, e) => {
+    this.setState({time: moment.format("LT")})
+  };
+
+  handleChangeDate = (moment) => {
+    this.setState({date: moment.toDate("D MMMM")});
+  };
+
+  handleChangeHomeGoals = (value) => {
+    this.setState({homeTeamGoals: value})
+  };
+
+  handleChangeGuestGoals = (value) => {
+    this.setState({guestTeamGoals: value})
+  };
+
+  handleClickAddResults = () => {
+    axios({
+      method: 'post',
+      url: 'https://fantasy-bfl.herokuapp.com/results/create',
+      data: {
+        date: this.state.date,
+        time: this.state.time,
+        homeTeamId: this.state.homeTeamId,
+        guestTeamId: this.state.guestTeamId,
+        homeTeamGoals: this.state.homeTeamGoals,
+        guestTeamGoals: this.state.guestTeamGoals,
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        this.setState({
+          modal: false,
+        });
+        window.location.reload(true);
+      }
+      console.log(res);
+      console.log(res.status);
+    });
   };
 
   render() {
@@ -64,12 +142,54 @@ class AddResultsModal extends React.Component {
           <ModalBody>
             <Row>
               <Col>
-                {/*datepicker*/}
+                <FormGroup>
+                  <Label>Время</Label>
+                  <InputGroup className="input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-calendar-grid-58"/>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Datetime
+                      locale="ru"
+                      dateFormat={false}
+                      timeFormat={true}
+                      inputProps={{
+                        placeholder: "Время"
+                      }}
+                      value={this.state.time}
+                      onChange={moment => this.handleChangeTime(moment)} />
+                  </InputGroup>
+                </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
+                  <Label>Дата</Label>
+                  <InputGroup className="input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-calendar-grid-58"/>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                  <Datetime
+                    locale="ru"
+                    dateFormat={"D MMMM"}
+                    timeFormat={false}
+                    inputProps={{
+                      placeholder: "Дата"
+                    }}
+                    value={this.state.date}
+                    onChange={moment => this.handleChangeDate(moment)} />
+                  </InputGroup>
+                </FormGroup>
+              </Col>
+              </Row>
+            <Row>
+              <Col xs="4" align="center">
+                <FormGroup>
                   <Label for="team">Дома</Label>
-                  <CustomInput bsSize="sm" type="select" name="team" id="team" value={this.state.team} onChange={this.handleChangeHomeTeam}>
+                  <CustomInput bsSize="sm" type="select" name="team" id="team" value={this.state.team}
+                               onChange={this.handleChangeHomeTeam}>
                     <option value="">Выберите команду</option>
                     {this.state.teams.map(team =>
                       <option key={team.id} id={team.id} value={team.team}>{team.team}</option>
@@ -77,10 +197,21 @@ class AddResultsModal extends React.Component {
                   </CustomInput>
                 </FormGroup>
               </Col>
-              <Col>
+              <Col xl="4" xs="4" align="center">
+                <FormGroup>
+                  <Label className="mb-2">Счет</Label><br/>
+                    <InputNumber size="sm" type="number" name="hometeamgoals" min={0} value={this.state.homeTeamGoals}
+                                 onChange={this.handleChangeHomeGoals}/>
+                                 <span> : </span>
+                  <InputNumber bsSize="sm" type="number" name="guestteamgoals" min={0} value={this.state.guestTeamGoals}
+                               onChange={this.handleChangeGuestGoals}/>
+                </FormGroup>
+              </Col>
+              <Col xs="4" align="center">
                 <FormGroup>
                   <Label for="team">Гости</Label>
-                  <CustomInput bsSize="sm" type="select" name="team" id="team" value={this.state.team} onChange={this.handleChangeGuestTeam}>
+                  <CustomInput bsSize="sm" type="select" name="team" id="team" value={this.state.team}
+                               onChange={this.handleChangeGuestTeam}>
                     <option value="">Выберите команду</option>
                     {this.state.teams.map(team =>
                       <option key={team.id} id={team.id} value={team.team}>{team.team}</option>
@@ -92,7 +223,7 @@ class AddResultsModal extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Отменить</Button>{' '}
-            <Button color="primary" onClick={this.handleClickAddToLeagueTable}>Добавить</Button>
+            <Button color="primary" onClick={this.handleClickAddResults}>Добавить</Button>
           </ModalFooter>
         </Modal>
       </div>

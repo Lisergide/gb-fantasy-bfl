@@ -7,6 +7,8 @@ import * as d3 from "d3-collection";
 // reactstrap component
 import { Table, Button } from "reactstrap";
 
+import moment from 'moment';
+
 
 
 
@@ -22,9 +24,15 @@ class ResultsTable extends Component {
     axios.get('https://fantasy-bfl.herokuapp.com/results')
       .then(res => {
         const results = res.data.results;
+        const resultsSort = results.sort(function (a, b) {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+
+          return dateA-dateB;
+        });
         const d3Group = d3.nest()
-          .key(function(d) {return d.date;})
-          .entries(results);
+          .key(function(d) {return moment(d.date).format("D MMMM");})
+          .entries(resultsSort);
         this.setState({
           groupByDate: d3Group
         });

@@ -18,7 +18,7 @@
     "nouislider": "14.0.2",
     "react": "16.8.6",
     "react-bootstrap-switch": "15.5.3",
-    "react-datetime": "2.16.3",
+    "react-datetime": "^2.16.3",
     "react-dom": "16.8.6",
     "react-images-upload": "^1.2.7",
     "react-router": "5.0.1",

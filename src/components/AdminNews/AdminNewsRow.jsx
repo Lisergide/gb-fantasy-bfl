@@ -33,7 +33,9 @@ const AdminNewsRow = (props) => {
         {props.position + 1}
       </td>
       <td className="td-news-img align-middle">
-        <img width="64px" src="https://via.placeholder.com/64x64" alt="admin-news-img"/>
+        <img width="64px" src={props.newsImg === null
+          ? "https://via.placeholder.com/64x64"
+          :  props.newsImg} alt="admin-news-img"/>
       </td>
       <td className="align-middle">
         {props.newsTitle}

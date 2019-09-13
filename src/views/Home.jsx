@@ -88,11 +88,11 @@ class Home extends React.Component {
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
                         <a href="#pablo" onClick={e => e.preventDefault()}>
-                          {/*<img*/}
-                          {/*  alt="..."*/}
-                          {/*  // className="rounded-circle"*/}
-                          {/*  src={require("assets/img/brand/bflmafia_logo.png")}*/}
-                          {/*/>*/}
+                          <img
+                            alt="..."
+                            // className="rounded-circle"
+                            src={require("assets/img/brand/bflmafia_logo.png")}
+                          />
                         </a>
                       </div>
                     </Col>
@@ -188,10 +188,10 @@ class Home extends React.Component {
                             // likes="10"
                             // comments="5"
                             backgroundImg={
-                              "https://via.placeholder.com/343x229"
-                              // item.imgfilename === null
-                              //   ? "https://via.placeholder.com/343x229"
-                              //   :  item.imgfilename
+                              // "https://via.placeholder.com/343x229"
+                              item.imgfilename === null
+                                ? "https://via.placeholder.com/343x229"
+                                :  item.imgfilename
                             }
                           />
                       </Col>

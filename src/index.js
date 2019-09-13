@@ -12,6 +12,9 @@ import config from './app.config';
 
 import App from "./App";
 
+// set the locale for the react-datetime instance
+require('moment/locale/ru');
+
 function onAuthRequired({history}) {
   history.push('/login-page');
 }
