@@ -94,7 +94,7 @@ class News extends React.Component {
                             ? "https://via.placeholder.com/800x400"
                             : item.imgfilename}
                                alt=""
-                               />
+                          />
                         </div>
                         <div>
                           <p className="text-center">

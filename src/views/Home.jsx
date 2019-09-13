@@ -14,6 +14,9 @@ import {
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import NewsBox from "components/NewsBox/NewsBox";
+import LeagueTable from "../components/LeagueTable/LeagueTable";
+import ResultsTable from "../components/ResultsTable/ResultsTable";
+
 // import {Link} from "react-router-dom";
 
 class Home extends React.Component {
@@ -33,11 +36,11 @@ class Home extends React.Component {
           const dateA = new Date(a.news_date);
           const dateB = new Date(b.news_date);
 
-          return dateB-dateA;
+          return dateB - dateA;
         });
-        this.setState({ news: newsSort });
+        this.setState({news: newsSort});
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -51,7 +54,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { news } = this.state;
+    const {news} = this.state;
     return (
       <>
         <Header/>
@@ -70,19 +73,19 @@ class Home extends React.Component {
             {/* SVG separator */}
             <div className="separator separator-bottom separator-skew">
               <svg xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-                version="1.1"
-                viewBox="0 0 2560 100"
-                x="0"
-                y="0">
+                   preserveAspectRatio="none"
+                   version="1.1"
+                   viewBox="0 0 2560 100"
+                   x="0"
+                   y="0">
                 <polygon className="fill-white"
-                  points="2560 0 2560 100 0 100"/>
+                         points="2560 0 2560 100 0 100"/>
               </svg>
             </div>
           </section>
           <section className="section">
             <Container>
-              <Card className="card-profile shadow mt--300 pb-5">
+              <Card className="card-profile shadow mt--300 mb-3">
                 <div className="px-4">
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
@@ -97,20 +100,20 @@ class Home extends React.Component {
                       </div>
                     </Col>
                     <Col className="order-lg-3 text-lg-right align-self-lg-center"
-                      lg="4">
+                         lg="4">
                       <div className="card-profile-actions py-4 mt-lg-0">
                         <Button className="mr-4"
-                          color="info"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          size="sm">
+                                color="info"
+                                href="#pablo"
+                                onClick={e => e.preventDefault()}
+                                size="sm">
                           Присоединиться
                         </Button>
                         <Button className="float-right"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          size="sm">
+                                color="default"
+                                href="#pablo"
+                                onClick={e => e.preventDefault()}
+                                size="sm">
                           Напиши нам
                         </Button>
                       </div>
@@ -135,7 +138,7 @@ class Home extends React.Component {
                   <div className="text-center mt-5">
                     <h3>
                       Брянская Футбольгая Лига{" "}
-                       {/*<span className="font-weight-light">, 27</span> */}
+                      {/*<span className="font-weight-light">, 27</span> */}
                     </h3>
                     {/* <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2" />
@@ -150,50 +153,62 @@ class Home extends React.Component {
                       University of Computer Science
                     </div> */}
                   </div>
-                  <div className="mt-5 py-5 border-top text-center">
-                    <Row className="justify-content-center">
-                      <Col lg="9">
-                        <p>
-                          Брянская Футбольная Лига - это лига, которая
-                          объединяет не только футболистов-любителей, но и
-                          самых настоящих профессионалов. За 3 года
-                          существования БФЛ в ней сыграло 63 команды и около
-                          700 футболистов. Среди которых были футболисты
-                          брянского "Динамо" Евгений Синица и Никита
-                          Бондарев, полузащитник смоленского "ЦРФСО" -
-                          Андрей Рыченков, а также Сергей Терехов - защитник
-                          команды Российской Премьер-лиги "Оренбург".
-                          Основной целью БФЛ является развитие и
-                          популяризация футбола в городе Брянске и Брянской
-                          области.
-                        </p>
+                  <div className="mt-2 py-2 text-center">
+                    {/*<Row className="justify-content-center">*/}
+                    {/*  <Col lg="9">*/}
+                        {/*<p>*/}
+                        {/*  Брянская Футбольная Лига - это лига, которая*/}
+                        {/*  объединяет не только футболистов-любителей, но и*/}
+                        {/*  самых настоящих профессионалов. За 3 года*/}
+                        {/*  существования БФЛ в ней сыграло 63 команды и около*/}
+                        {/*  700 футболистов. Среди которых были футболисты*/}
+                        {/*  брянского "Динамо" Евгений Синица и Никита*/}
+                        {/*  Бондарев, полузащитник смоленского "ЦРФСО" -*/}
+                        {/*  Андрей Рыченков, а также Сергей Терехов - защитник*/}
+                        {/*  команды Российской Премьер-лиги "Оренбург".*/}
+                        {/*  Основной целью БФЛ является развитие и*/}
+                        {/*  популяризация футбола в городе Брянске и Брянской*/}
+                        {/*  области.*/}
+                        {/*</p>*/}
                         {/*<a href="#pablo" onClick={e => e.preventDefault()}>*/}
                         {/*  Читать далее...*/}
                         {/*</a>*/}
+                    {/*  </Col>*/}
+                    {/*</Row>*/}
+                    <Row>
+                      <Col className="border mr-1">
+                        <h5>Турнирная таблица</h5>
+                          <LeagueTable />
+                      </Col>
+                      <Col className="border">
+                        <h5>Результаты матчей</h5>
+                          <ResultsTable />
                       </Col>
                     </Row>
                   </div>
                 </div>
+              </Card>
+              <Card className="shadow">
                 <h3 className="text-center">Новости БФЛ</h3>
                 <div className="news_block">
                   <Row>
                     {news.map(item =>
                       <Col key={item.id} sm="6" lg="4" className="d-flex justify-content-center">
-                          <NewsBox
-                            link={`/news-page/${item.id}`}
-                            newsTitle={item.title}
-                            newsDate={item.news_date}
-                            newsId={item.id}
-                            newsText={item.text}
-                            // likes="10"
-                            // comments="5"
-                            backgroundImg={
-                              // "https://via.placeholder.com/343x229"
-                              item.imgfilename === null
-                                ? "https://via.placeholder.com/343x229"
-                                :  item.imgfilename
-                            }
-                          />
+                        <NewsBox
+                          link={`/news-page/${item.id}`}
+                          newsTitle={item.title}
+                          newsDate={item.news_date}
+                          newsId={item.id}
+                          newsText={item.text}
+                          // likes="10"
+                          // comments="5"
+                          backgroundImg={
+                            // "https://via.placeholder.com/343x229"
+                            item.imgfilename === null
+                              ? "https://via.placeholder.com/343x229"
+                              : item.imgfilename
+                          }
+                        />
                       </Col>
                     )}
                   </Row>

@@ -140,6 +140,12 @@
   height: auto;
 }
 
+.card_title__wrapper {
+  background-color: rgba(23, 43, 77, 0.6);
+  border-radius: $border-radius-xl;
+  padding: 5px;
+}
+
 @include media-breakpoint-up(lg) {
   .control-card {
     min-height: 300px;

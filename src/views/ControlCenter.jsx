@@ -1,4 +1,5 @@
 import React from "react";
+import {withAuth} from '@okta/okta-react';
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -9,7 +10,8 @@ import {
   Container,
   Row,
   Col,
-  Button, UncontrolledTooltip
+  Button,
+  UncontrolledTooltip
 } from "reactstrap";
 
 // core components
@@ -19,16 +21,21 @@ import CreateNewTeam from "../components/CreateNewTeam/CreateNewTeam";
 import CreateNewsModal from "../components/CreateNewsModal/CreateNewsModal";
 import AdminNews from "../components/AdminNews/AdminNews";
 import DeleteTeam from "../components/DeleteTeam/DeleteTeam";
-// import EditTeam from "../components/EditTeam/EditTeam";
 
-
-class ControlCenter extends React.Component {
+export default withAuth(class ControlCenter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
       team: '',
     };
+    this.getCurrentUser = this.getCurrentUser.bind(this);
   }
+
+  async getCurrentUser(){
+    this.props.auth.getUser()
+      .then(user => this.setState({user}));
+  };
 
   getNews() {
     axios.get("https://fantasy-bfl.herokuapp.com/news")
@@ -43,18 +50,20 @@ class ControlCenter extends React.Component {
 
   getTeamName = (value) => {
     this.setState({team: value});
-    console.log(this.state.team)
   };
 
   componentDidMount() {
+    this.getCurrentUser();
+
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
+    // this.refs.main.scrollTop = 0;
 
     this.getNews();
   }
 
   render() {
+    if (!this.state.user) return null;
     return (
       <>
         <Header/>
@@ -85,7 +94,6 @@ class ControlCenter extends React.Component {
                       <h3>Управление командами</h3>
                       <CreateNewTeam />
                       <DeleteTeam getTeamName={this.getTeamName} />
-                      {/*<EditTeam team={this.state.team }/>*/}
                     </CardBody>
                   </Card>
                 </Col>
@@ -124,6 +132,6 @@ class ControlCenter extends React.Component {
       </>
     );
   }
-}
+})
 
-export default ControlCenter;
+// export default ControlCenter;

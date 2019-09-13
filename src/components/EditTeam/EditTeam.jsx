@@ -1,8 +1,8 @@
 import React from "react";
+import axios from "axios";
 
 // reactstrap component
 import {Button, Input, InputGroup, InputGroupAddon, Label} from "reactstrap";
-import axios from "axios";
 
 class EditTeam extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class EditTeam extends React.Component {
       <div>
         <Label for="team">Изменение команды</Label>
         <InputGroup>
-          <Input type="text" name="team" id="team" value={this.props.team} onChange={this.handleChangeTeam} />
+          <Input type="text" name="team" id="team" value={this.props.team} onChange={this.handleChangeTeam}/>
           <InputGroupAddon addonType="append">
             <Button color="danger" onClick={this.handleClickEditTeamName}>Изменить</Button>
           </InputGroupAddon>

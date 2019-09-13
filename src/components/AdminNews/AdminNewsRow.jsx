@@ -1,17 +1,16 @@
 import React from "react";
+import axios from "axios";
 
 // reactstrap components
 import {Button} from "reactstrap";
 
 // core components
 import EditNewsModal from "../EditNewsModal/EditNewsModal";
-import axios from "axios";
 
 const AdminNewsRow = (props) => {
 
   const handleClickDeleteNews = async (e) => {
     e.preventDefault();
-    // console.log(e.target.id);
     await axios({
       method: 'post',
       url: 'https://fantasy-bfl.herokuapp.com/news/delete',
@@ -35,7 +34,7 @@ const AdminNewsRow = (props) => {
       <td className="td-news-img align-middle">
         <img width="64px" src={props.newsImg === null
           ? "https://via.placeholder.com/64x64"
-          :  props.newsImg} alt="admin-news-img"/>
+          : props.newsImg} alt="admin-news-img"/>
       </td>
       <td className="align-middle">
         {props.newsTitle}
@@ -49,6 +48,7 @@ const AdminNewsRow = (props) => {
           newsTitle={props.newsTitle}
           newsText={props.newsText}
           newsDate={new Date(props.newsDate).toISOString().substring(0, 10)}
+          newsImgUrl={props.newsImg}
         />
       </td>
       <td className="align-middle">

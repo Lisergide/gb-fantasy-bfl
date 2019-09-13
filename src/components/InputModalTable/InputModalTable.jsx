@@ -1,10 +1,10 @@
 import React from "react";
-import {Table, Input} from "reactstrap";
+import {Table} from "reactstrap";
 
 // ant-design components
 import {InputNumber} from "antd";
 
-class InputModalTable extends React.Component{
+class InputModalTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -13,7 +13,7 @@ import {
   FormGroup,
   Label,
   Input,
-  Progress,
+  Progress, InputGroupAddon, InputGroupText, InputGroup,
 } from "reactstrap";
 
 export default class CreateNewsModal extends React.Component {
@@ -30,7 +30,6 @@ export default class CreateNewsModal extends React.Component {
       newsImgName: null,
       newsImgUrl: null
     };
-    // this.handleClickCreateNews = this.handleClickCreateNews.bind(this);
   }
 
   toggle = () => {
@@ -88,7 +87,6 @@ export default class CreateNewsModal extends React.Component {
   };
 
   handleClickCreateNews = async () => {
-    // e.preventDefault();
     await axios({
       method: 'post',
       url: 'https://fantasy-bfl.herokuapp.com/news/create',
@@ -112,74 +110,80 @@ export default class CreateNewsModal extends React.Component {
   };
 
   render() {
-    // console.log(this.state.newsImgUrl);
     const {btnTitle, modalClassName, modalTitle} = this.props;
     return (
       <div>
-      <Button id="addNews" color="success" onClick={this.toggle}>{btnTitle}</Button>
-      {/*<Button className={btnClassName} color={btnColor} onClick={this.toggle}>*/}
-      {/*  <span className="btn-add-news__plus">{btnIcon}</span> <br/>*/}
-      {/*  <span className="btn-add-news__title">{btnLabel}</span>*/}
-      {/*</Button>*/}
-      <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle} className={modalClassName}>
-        <ModalHeader toggle={this.toggle}>{modalTitle}</ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="news-title">Заголовок новости</Label>
-              <Input
-                type="text"
-                id="news-title"
-                name="news-title"
-                value={this.state.newsTitle}
-                onChange={this.handleChangeNewsTitle}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="news-text">Текст новости</Label>
-              <Input
-                type="textarea"
-                id="news-text"
-                name="news-text"
-                value={this.state.newsText}
-                onChange={this.handleChangeNewsText}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="news-date">Дата публикации</Label>
-              <Input
-                type="date"
-                name="news-date"
-                id="news-date"
-                placeholder="date placeholder"
-                value={this.state.newsDate}
-                onChange={this.handleChangeNewsDate}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="news-img">Загрузить изображение</Label>
-              <Input
-                type="file"
-                id="news-img"
-                name="news-img"
-                onChange={this.handleChangeNewsImg}
-              />
-              <img src={this.state.file} width="189" alt=""/><br/>
-              <Progress className="my-2" value={this.state.progress} max="100"/>
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={this.toggle}>Отменить</Button>
-          <Button color="primary"
-                  onClick={this.state.newsImg === null
-                    ? this.handleClickCreateNews
-                    : this.handleClickUploadImg}>
-            Опубликовать
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </div>
+        <Button id="addNews" color="success" onClick={this.toggle}>{btnTitle}</Button>
+        {/*<Button className={btnClassName} color={btnColor} onClick={this.toggle}>*/}
+        {/*  <span className="btn-add-news__plus">{btnIcon}</span> <br/>*/}
+        {/*  <span className="btn-add-news__title">{btnLabel}</span>*/}
+        {/*</Button>*/}
+        <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle} className={modalClassName}>
+          <ModalHeader toggle={this.toggle}>{modalTitle}</ModalHeader>
+          <ModalBody>
+            <Form>
+              <FormGroup>
+                <Label for="news-title">Заголовок новости</Label>
+                <Input
+                  type="text"
+                  id="news-title"
+                  name="news-title"
+                  value={this.state.newsTitle}
+                  onChange={this.handleChangeNewsTitle}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="news-text">Текст новости</Label>
+                <Input
+                  type="textarea"
+                  id="news-text"
+                  name="news-text"
+                  value={this.state.newsText}
+                  onChange={this.handleChangeNewsText}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="news-date">Дата публикации</Label>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="far fa-calendar-alt"/>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    type="date"
+                    name="news-date"
+                    id="news-date"
+                    placeholder="date placeholder"
+                    value={this.state.newsDate}
+                    onChange={this.handleChangeNewsDate}
+                  />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <Label for="news-img">Загрузить изображение</Label>
+                <Input
+                  type="file"
+                  id="news-img"
+                  name="news-img"
+                  onChange={this.handleChangeNewsImg}
+                />
+                <img src={this.state.file} width="189" alt=""/><br/>
+                <Progress className="my-2" value={this.state.progress} max="100"/>
+              </FormGroup>
+            </Form>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={this.toggle}>Отменить</Button>
+            <Button color="primary"
+                    onClick={this.state.newsImg === null
+                      ? this.handleClickCreateNews
+                      : this.handleClickUploadImg}>
+              Опубликовать
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </div>
     )
   }
 }

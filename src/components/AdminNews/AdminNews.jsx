@@ -23,18 +23,24 @@ class AdminNews extends React.Component {
           const dateA = new Date(a.news_date);
           const dateB = new Date(b.news_date);
 
-          return dateB-dateA;
+          return dateB - dateA;
         });
         newsSort.map((item, index) => {
-            const {id, news_date, title, text, imgfilename} = item;
+          const {id, news_date, title, text, imgfilename} = item;
 
-            return (
-              rows.push(
-                <AdminNewsRow key={index} position={index} newsId={id} newsTitle={title} newsText={text} newsDate={news_date}
-                              newsImg={imgfilename}/>
-              )
+          return (
+            rows.push(
+              <AdminNewsRow
+                key={index}
+                position={index}
+                newsId={id}
+                newsTitle={title}
+                newsText={text}
+                newsDate={news_date}
+                newsImg={imgfilename}/>
             )
-          });
+          )
+        });
         this.setState({
           rows: rows
         })

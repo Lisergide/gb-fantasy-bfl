@@ -13,14 +13,13 @@ import {
 // core components
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import ResultsTable from "../components/ResultsTable/ResultsTable";
+import AdminResultsTable from "../components/AdminResultsTable/AdminResultsTable";
 import AddResultsModal from "../components/AddResultsModal/AddResultsModal";
 
 class ResultsView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -28,21 +27,22 @@ class ResultsView extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+
   render() {
     return (
       <>
-        <Header />
+        <Header/>
         <main ref="main">
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
             </div>
             <Container className="pt-lg-md">
               <Row className="justify-content-center">
@@ -51,10 +51,10 @@ class ResultsView extends React.Component {
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="d-flex justify-content-between">
                         <h2>Результаты</h2>
-                        <AddResultsModal btnTitle={<i className="fas fa-plus"/>} />
+                        <AddResultsModal btnTitle={<i className="fas fa-plus"/>}/>
                         <UncontrolledTooltip placement="top" target="addResults">Добавить матч</UncontrolledTooltip>
                       </div>
-                      <ResultsTable />
+                      <AdminResultsTable/>
                     </CardBody>
                   </Card>
                 </Col>
@@ -62,7 +62,7 @@ class ResultsView extends React.Component {
             </Container>
           </section>
         </main>
-        <Footer />
+        <Footer/>
       </>
     );
   }

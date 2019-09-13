@@ -13,8 +13,7 @@ import {
   FormGroup,
   Label,
   Input,
-  CardLink,
-  Progress,
+  Progress, InputGroupAddon, InputGroupText, InputGroup,
 } from "reactstrap";
 
 // firebase storage
@@ -32,9 +31,8 @@ export default class EditNewsModal extends React.Component {
       file: null,
       newsImg: null,
       newsImgName: null,
-      newsImgUrl: null
+      newsImgUrl: this.props.newsImgUrl
     };
-    // this.handleClickEditNews = this.handleClickEditNews.bind(this);
   }
 
   toggle = () => {
@@ -115,7 +113,7 @@ export default class EditNewsModal extends React.Component {
   render() {
     // console.log(this.state.newsImg);
     const {newsTitle, newsText, newsDate} = this.state;
-    const {btnColor, modalClassName, modalTitle} = this.props;
+    const {modalClassName} = this.props;
     return <>
       <Button color="primary" onClick={this.toggle}>
         <i className="fas fa-edit"/>
@@ -147,14 +145,21 @@ export default class EditNewsModal extends React.Component {
             </FormGroup>
             <FormGroup>
               <Label for="news-date">Дата публикации</Label>
-              <Input
-                type="date"
-                name="news-date"
-                id="news-date"
-                placeholder="date placeholder"
-                value={newsDate}
-                onChange={this.handleChangeNewsDate}
-              />
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="far fa-calendar-alt"/>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type="date"
+                  name="news-date"
+                  id="news-date"
+                  placeholder="date placeholder"
+                  value={newsDate}
+                  onChange={this.handleChangeNewsDate}
+                />
+              </InputGroup>
             </FormGroup>
             <FormGroup>
               <Label for="news-img">Загрузить изображение</Label>

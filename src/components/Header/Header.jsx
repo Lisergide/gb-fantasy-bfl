@@ -155,14 +155,16 @@ export default withAuth(class Header extends React.Component {
                       </span>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
-                      <NavLink href="/control-page">
-                        <i className="fas fa-sliders-h d-lg-none mr-1"/>
-                        <span className="nav-link-inner--text">
+                    {this.state.authenticated ?
+                      <NavItem>
+                        <NavLink href="/control-page">
+                          <i className="fas fa-sliders-h d-lg-none mr-1"/>
+                          <span className="nav-link-inner--text">
                         Центр управления
                       </span>
-                      </NavLink>
-                    </NavItem>
+                        </NavLink>
+                      </NavItem>
+                      : null}
                   </Nav>
                   <Nav className="align-items-lg-center ml-lg-auto" navbar>
                     {this.state.authenticated

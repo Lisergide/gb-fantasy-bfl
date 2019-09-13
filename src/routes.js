@@ -1,11 +1,10 @@
 // core components
 import Home from "views/Home";
-import Landing from "views/Landing";
 import Login from "views/Login";
 import Register from "views/Register";
 import LeagueTableView from "views/LeagueTableView";
 import News from "views/News";
-import ControlCenter from "views/ControlCenter";
+// import ControlCenter from "views/ControlCenter";
 import ResultsView from "views/ResultsView";
 
 export default [
@@ -13,11 +12,6 @@ export default [
     path: '/',
     exact: true,
     component: Home,
-  },
-  {
-    path: '/landing-page',
-    exact: true,
-    component: Landing,
   },
   {
     path: '/login-page',
@@ -39,11 +33,11 @@ export default [
     exact: true,
     component: News,
   },
-  {
-    path: '/control-page',
-    exact: true,
-    component: ControlCenter,
-  },
+  // {
+  //   path: '/control-page',
+  //   exact: true,
+  //   component: ControlCenter,
+  // },
   {
     path: '/results-page',
     exact: true,

@@ -23,20 +23,21 @@ import {
 // antd components
 import {InputNumber} from "antd";
 
-class AddResultsModal extends React.Component {
+class EditResultsModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      date: '',
-      time: '',
-      home: '',
+      date: new Date(this.props.date).toISOString().substring(0, 10),
+      time: this.props.time,
+      home: this.props.home,
+      guest: this.props.guest,
+      homeTeamGoals: this.props.homeTeamGoals,
+      guestTeamGoals: this.props.guestTeamGoals,
       homeTeamId: '',
-      guest: '',
       guestTeamId: '',
-      homeTeamGoals: 0,
-      guestTeamGoals: 0,
       teams: [],
+
     };
   }
 
@@ -50,8 +51,24 @@ class AddResultsModal extends React.Component {
     });
   }
 
+  getResultsId() {
+    axios.get(`https://fantasy-bfl.herokuapp.com/results/${this.props.resultsId}`)
+      .then(res => {
+        const resultsId = res.data.results;
+        resultsId.map(res =>
+          this.setState({
+            homeTeamId: res.hometeamid,
+            guestTeamId: res.guestteamid
+          })
+        )
+      }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
   componentDidMount() {
     this.getTeams();
+    this.getResultsId();
   }
 
   toggle = () => {
@@ -65,6 +82,7 @@ class AddResultsModal extends React.Component {
     const index = e.target.options.selectedIndex;
     const optionElement = e.target.childNodes[index];
     const homeTeamId = optionElement.getAttribute('id');
+    console.log(homeTeamId);
     this.setState({
       home: home,
       homeTeamId: homeTeamId,
@@ -76,6 +94,7 @@ class AddResultsModal extends React.Component {
     const index = e.target.options.selectedIndex;
     const optionElement = e.target.childNodes[index];
     const guestTeamId = optionElement.getAttribute('id');
+    console.log(guestTeamId);
     this.setState({
       guest: guest,
       guestTeamId: guestTeamId,
@@ -98,10 +117,10 @@ class AddResultsModal extends React.Component {
     this.setState({guestTeamGoals: value})
   };
 
-  handleClickAddResults = () => {
+  handleClickEditResults = () => {
     axios({
-      method: 'post',
-      url: 'https://fantasy-bfl.herokuapp.com/results/create',
+      method: 'put',
+      url: `https://fantasy-bfl.herokuapp.com/results/${this.props.resultsId}`,
       data: {
         date: this.state.date,
         time: this.state.time,
@@ -125,7 +144,7 @@ class AddResultsModal extends React.Component {
   render() {
     return (
       <div>
-        <Button id="addResults" color="success" onClick={this.toggle}>{this.props.btnTitle}</Button>
+        <a href="javascript:void(0)" className="text-primary" onClick={this.toggle}>{this.props.btnTitle}</a>
         <Modal isOpen={this.state.modal} centered={true} fade={false} toggle={this.toggle}
                className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Добавить результат матча</ModalHeader>
@@ -177,7 +196,7 @@ class AddResultsModal extends React.Component {
                   <Label for="team">Дома</Label>
                   <CustomInput bsSize="sm" type="select" name="team" id="team" value={this.state.team}
                                onChange={this.handleChangeHomeTeam}>
-                    <option value="">Выберите команду</option>
+                    <option id={this.state.homeTeamId} value={this.props.home}>{this.props.home}</option>
                     {this.state.teams.map(team =>
                       <option key={team.id} id={team.id} value={team.team}>{team.team}</option>
                     )}
@@ -199,7 +218,7 @@ class AddResultsModal extends React.Component {
                   <Label for="team">Гости</Label>
                   <CustomInput bsSize="sm" type="select" name="team" id="team" value={this.state.team}
                                onChange={this.handleChangeGuestTeam}>
-                    <option value="">Выберите команду</option>
+                    <option id={this.state.guestTeamId} value={this.props.guest}>{this.props.guest}</option>
                     {this.state.teams.map(team =>
                       <option key={team.id} id={team.id} value={team.team}>{team.team}</option>
                     )}
@@ -210,7 +229,7 @@ class AddResultsModal extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Отменить</Button>{' '}
-            <Button color="primary" onClick={this.handleClickAddResults}>Добавить</Button>
+            <Button color="primary" onClick={this.handleClickEditResults}>Добавить</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -218,4 +237,4 @@ class AddResultsModal extends React.Component {
   }
 }
 
-export default AddResultsModal;
+export default EditResultsModal;

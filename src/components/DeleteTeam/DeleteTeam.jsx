@@ -41,27 +41,28 @@ class DeleteTeam extends React.Component {
   };
 
   handleClickDeleteTeam = () => {
-  axios({
-    method: 'post',
-    url: 'https://fantasy-bfl.herokuapp.com/teams/delete',
-    data: {
-      id: this.state.team_id
-    }
-  }).then(res => {
-    if (res.status === 200) {
-      window.location.reload(true);
-    }
-    console.log(res);
-    console.log(res.status);
-  })
-};
+    axios({
+      method: 'post',
+      url: 'https://fantasy-bfl.herokuapp.com/teams/delete',
+      data: {
+        id: this.state.team_id
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        window.location.reload(true);
+      }
+      console.log(res);
+      console.log(res.status);
+    })
+  };
 
   render() {
     return (
       <div>
         <Label for="team">Удаление команды</Label>
         <InputGroup>
-          <CustomInput className="delete-team__select" type="select" name="team" id="team" value={this.state.team} onChange={this.handleChangeTeam}>
+          <CustomInput className="delete-team__select" type="select" name="team" id="team" value={this.state.team}
+                       onChange={this.handleChangeTeam}>
             <option value="">Выберите команду</option>
             {this.state.teams.map(team =>
               <option key={team.id} id={team.id} value={team.team}>{team.team}</option>

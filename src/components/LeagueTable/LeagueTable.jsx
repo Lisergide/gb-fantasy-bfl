@@ -20,11 +20,12 @@ class LeagueTable extends Component {
         // console.log(responseJson);
         responseJson.league_table.map(
           (item, index) => {
-            const {id, team, team_id, games_played, wins, draws, looses, goales_scored, goales_missed, points} = item;
+            const {id, team, team_id, games_played, points} = item;
 
             return (
               rows.push(
-                <LeagueTableRow key={index} id={id} team_id={team_id} position={index} team={team} games_played={games_played} wins={wins} draws={draws} looses={looses} goales_scored={goales_scored} goales_missed={goales_missed} points={points} />
+                <LeagueTableRow key={index} id={id} team_id={team_id} position={index} team={team}
+                                     games_played={games_played} points={points}/>
               )
             )
           }
@@ -44,9 +45,11 @@ class LeagueTable extends Component {
 
   render() {
     return (
-      <LeagueTableBody>
-        {this.state.rows}
-      </LeagueTableBody>
+      <div>
+        <LeagueTableBody>
+          {this.state.rows}
+        </LeagueTableBody>
+      </div>
     )
   };
 

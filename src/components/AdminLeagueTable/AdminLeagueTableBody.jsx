@@ -1,7 +1,7 @@
 import React from "react";
 import {Table} from 'reactstrap';
 
-const LeagueTableBody = (props) => {
+const AdminLeagueTableBody = (props) => {
   return (
     <Table size="sm" className="standings">
       <tbody>
@@ -15,6 +15,21 @@ const LeagueTableBody = (props) => {
         <td title="Игры">
           И
         </td>
+        <td title="Победы">
+          В
+        </td>
+        <td title="Ничьи">
+          Н
+        </td>
+        <td title="Поражения">
+          П
+        </td>
+        <td title="Забито мячей">
+          ЗМ
+        </td>
+        <td title="Пропущено мячей">
+          ПМ
+        </td>
         <td title="Очки">
           О
         </td>
@@ -25,4 +40,4 @@ const LeagueTableBody = (props) => {
   );
 };
 
-export default LeagueTableBody;
+export default AdminLeagueTableBody;

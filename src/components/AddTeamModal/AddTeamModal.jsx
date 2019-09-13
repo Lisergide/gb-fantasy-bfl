@@ -11,17 +11,13 @@ import {
   ModalBody,
   ModalFooter,
   Table,
-  InputGroup,
-  InputGroupAddon,
   Label,
-  Input,
   FormGroup,
   CustomInput,
 } from "reactstrap";
 
 // ant-design components
 import {InputNumber} from "antd";
-// axios-cache-adapter
 
 const cache = setupCache({
   maxAge: 15 * 60 * 1000,
@@ -159,10 +155,7 @@ class AddTeamModal extends React.Component {
   };
 
   render() {
-    // console.log(this.state.teams);
-    // console.log(this.state.resultsTeams);
-    const { teamFilterNoAdd } = this.state;
-
+    const {teamFilterNoAdd} = this.state;
     return (
       <div>
         <Button id="addTeam" color="success" onClick={this.toggle}>{this.props.btnTitle}</Button>

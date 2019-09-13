@@ -18,9 +18,7 @@ import {
 // ant-design components
 import {InputNumber} from "antd";
 
-// import 'antd/dist/antd.css';
-
-class LeagueTableModal extends React.Component {
+class AdminLeagueTableModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -223,4 +221,4 @@ class LeagueTableModal extends React.Component {
   }
 }
 
-export default LeagueTableModal;
+export default AdminLeagueTableModal;
